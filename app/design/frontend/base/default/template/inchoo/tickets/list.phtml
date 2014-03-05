@@ -1,0 +1,14 @@
+<div class="page-title title-buttons">
+    <h1>
+        <?php echo get_class($this) ?>
+    </h1>
+    <button type="button" title="<?php echo $this->__('Tickets') ?>"
+            class="button"
+        onclick="window.location='<?php echo $this->getAddTicketUrl(); ?>';">
+        <span>
+            <span>
+                <?php echo $this->__('Tickets') ?>
+            </span>
+        </span>
+    </button>
+</div>

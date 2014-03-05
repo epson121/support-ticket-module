@@ -1,0 +1,29 @@
+<form action="<?php echo $this->getUrl('tickets/support/newticket/')?>" method="post" id="form-validate">
+    <fieldset>
+        <?php echo $this->getBlockHtml('formkey')?>
+        <ul class="form-list">
+            <li >
+                <label for="ticket_subject"><?php echo $this->__('Subject') ?></label>
+                <br/>
+                <input type="text" name="ticket_subject" id="ticket_subject" value="" title="Ticket subject"/>
+            </li>
+            <li>
+                <label for="ticket_content"><?php echo $this->__('Content') ?></label>
+                <br>
+                <textarea name="ticket_content" rows="4" cols="100"></textarea>
+            </li>
+        </ul>
+        <div class="buttons-set">
+            <button type="submit" title="Add ticket" class="button">
+                <span>
+                    <span><?php echo $this->__('Add ticket') ?></span>
+                </span>
+            </button>
+        </div>
+    </fieldset>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+var dataForm = new VarienForm('form-validate', true);
+//]]>
+</script>

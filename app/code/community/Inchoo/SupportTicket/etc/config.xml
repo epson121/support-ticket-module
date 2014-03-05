@@ -1,31 +1,66 @@
 <config>
     <modules>
         <Inchoo_SupportTicket>
-            <version></version>
+            <version>0.0.1</version>
         </Inchoo_SupportTicket>
     </modules>
-    <config>
-        <modules>
-            <Inchoo_SupportTicket>
-                <version></version>
-            </Inchoo_SupportTicket>
-        </modules>
-        <global>
-            <models>
-                <inchoo_supportticket>
-                    <class>Inchoo_SupportTicket_Model</class>
+    <global>
+        <models>
+            <inchoo_supportticket>
+                <class>Inchoo_SupportTicket_Model</class>
+                <resourceModel>inchoo_supportticket_resource</resourceModel>
+            </inchoo_supportticket>
+            <inchoo_supportticket_resource>
+                <class>Inchoo_SupportTicket_Model_Resource</class>
+                <entities>
+                    <ticket>
+                        <table>inchoo_supportticket_ticket</table>
+                    </ticket>
+                    <ticket_comment>
+                        <table>inchoo_supportticket_ticket_comment</table>
+                    </ticket_comment>
+                </entities>
+            </inchoo_supportticket_resource>
+        </models>
+        <helpers>
+           <inchoo_supportticket>
+                <class>Inchoo_SupportTicket_Helper</class>
+            </inchoo_supportticket>
+        </helpers>
+        <blocks>
+            <inchoo_supportticket>
+                <class>Inchoo_SupportTicket_Block</class>
+            </inchoo_supportticket>
+            <customer>
+               <rewrite>
+                    <account_navigation>Inchoo_SupportTicket_Block_Account_Navigation</account_navigation>
+                </rewrite>
+            </customer>
+        </blocks>
+        <resources>
+            <inchoo_supportticket_setup>
+                <setup>
+                    <module>Inchoo_SupportTicket</module>
+                </setup>
+            </inchoo_supportticket_setup>
+        </resources>
+    </global>
+    <frontend>
+        <routers>
+            <inchoo_tickets>
+                <use>standard</use>
+                <args>
+                    <module>Inchoo_SupportTicket</module>
+                    <frontName>tickets</frontName>
+                </args>
+            </inchoo_tickets>
+        </routers>
+        <layout>
+            <updates>
+                <inchoo_supportticket module="inchoo_supportticket">
+                    <file>support_ticket.xml</file>
                 </inchoo_supportticket>
-            </models>
-            <helpers>
-               <inchoo_supportticket>
-                    <class>Inchoo_SupportTicket_Helper</class>
-                </inchoo_supportticket>
-            </helpers>
-            <blocks>
-                <inchoo_supportticket>
-                    <class>Inchoo_SupportTicket_Block</class>
-                </inchoo_supportticket>
-            </blocks>
-        </global>
-    </config>
+            </updates>
+        </layout>
+    </frontend>
 </config>
