@@ -1,0 +1,31 @@
+<config>
+    <modules>
+        <Inchoo_SupportTicket>
+            <version></version>
+        </Inchoo_SupportTicket>
+    </modules>
+    <config>
+        <modules>
+            <Inchoo_SupportTicket>
+                <version></version>
+            </Inchoo_SupportTicket>
+        </modules>
+        <global>
+            <models>
+                <inchoo_supportticket>
+                    <class>Inchoo_SupportTicket_Model</class>
+                </inchoo_supportticket>
+            </models>
+            <helpers>
+               <inchoo_supportticket>
+                    <class>Inchoo_SupportTicket_Helper</class>
+                </inchoo_supportticket>
+            </helpers>
+            <blocks>
+                <inchoo_supportticket>
+                    <class>Inchoo_SupportTicket_Block</class>
+                </inchoo_supportticket>
+            </blocks>
+        </global>
+    </config>
+</config>
