@@ -5,6 +5,6 @@ class Inchoo_SupportTicket_Model_Resource_Ticket_Collection extends Mage_Core_Mo
     public function _construct()
     {
         // model name
-        $this->_init('inchoo_ticket/ticket');
+        $this->_init('inchoo_supportticket/ticket');
     }
 }

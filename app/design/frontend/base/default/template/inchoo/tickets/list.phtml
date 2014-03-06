@@ -1,14 +1,45 @@
+<?php
+    $_collection = $this->getTicketList();
+    $helper = Mage::helper('inchoo_supportticket')
+?>
 <div class="page-title title-buttons">
     <h1>
-        <?php echo get_class($this) ?>
+        <?php echo $this->__('My Tickets') ?>
     </h1>
-    <button type="button" title="<?php echo $this->__('Tickets') ?>"
+    <button type="button" title="<?php echo $this->__('New Ticket') ?>"
             class="button"
         onclick="window.location='<?php echo $this->getAddTicketUrl(); ?>';">
         <span>
             <span>
-                <?php echo $this->__('Tickets') ?>
+                <?php echo $this->__('New Ticket') ?>
             </span>
         </span>
     </button>
+
+</div>
+
+<div class="customer-list">
+    <?php if(!$_collection->count()): ?>
+    <h2><?php echo $this->__('You have no tickets.') ?></h2>
+    </a>
+    <?php else: ?>
+        <ul>
+            <?php foreach($_collection as $ticket): ?>
+                <li>
+                    <p>
+                    <h3><?php echo $ticket->getTicketId(); ?></h3>
+                        <strong>
+                            <?php echo $this->__('Subject:')?>
+                            <?php echo $ticket->getSubject(); ?>
+                        </strong>
+                        <br>
+                    <a href="<?php echo $this->getUrl('tickets/support/view', array('_query' => array('ticket_id' => $ticket->getTicketId()))) ?>">
+                        <?php echo $this->__('View Ticket') ?>
+                    </a>
+                    </p>
+                </li>
+                <br>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
 </div>

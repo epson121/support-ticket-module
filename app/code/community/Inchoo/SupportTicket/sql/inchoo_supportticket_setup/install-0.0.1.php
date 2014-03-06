@@ -28,10 +28,14 @@ if ($installer->getConnection()->isTableExists($tableName) != true) {
             'nullable'  => false,
             'primary'   => true,
         ), 'Ticket Id')
-         ->addColumn('customer_id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
+        ->addColumn('customer_id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
             'unsigned'  => true,
             'nullable'  => false,
         ), 'Customer Id')
+        ->addColumn('website_id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
+            'unsigned'  => true,
+            'nullable'  => false,
+        ), 'Website Id')
         ->addColumn('subject', Varien_Db_Ddl_Table::TYPE_TEXT, 50, array(
             'nullable'  => false,
         ), 'Subject')
@@ -45,6 +49,7 @@ if ($installer->getConnection()->isTableExists($tableName) != true) {
         ), 'Status')
         ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array(
             'nullable' => false,
+            'default' => now()
         ), 'Created At')
         ->addForeignKey(
             $installer->getFkName(

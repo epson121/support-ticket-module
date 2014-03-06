@@ -19,9 +19,17 @@
     <inchoo_tickets_support_new>
         <update handle="customer_account"/>
         <reference name="content">
-            <block name="tickets.new" type="core/template"
+            <block name="tickets.new" type="inchoo_supportticket/list"
                    template="inchoo/tickets/new.phtml" as="tickets_new"/>
         </reference>
     </inchoo_tickets_support_new>
+
+    <inchoo_tickets_support_view>
+        <update handle="customer_account"/>
+        <reference name="content">
+            <block name="tickets.view" type="inchoo_supportticket/list"
+                   template="inchoo/tickets/view.phtml" as="tickets_view"/>
+        </reference>
+    </inchoo_tickets_support_view>
 
 </layout>

@@ -1,3 +1,17 @@
+<div class="page-title title-buttons">
+    <h1>
+        <?php echo $this->__('New Ticket') ?>
+    </h1>
+    <button type="button" title="<?php echo $this->__('Back to ticket list') ?>"
+            class="button"
+        onclick="window.location='<?php echo $this->getListTicketsUrl(); ?>';">
+        <span>
+            <span>
+                <?php echo $this->__('Back to ticket list') ?>
+            </span>
+        </span>
+    </button>
+</div>
 <form action="<?php echo $this->getUrl('tickets/support/newticket/')?>" method="post" id="form-validate">
     <fieldset>
         <?php echo $this->getBlockHtml('formkey')?>
@@ -5,12 +19,12 @@
             <li >
                 <label for="ticket_subject"><?php echo $this->__('Subject') ?></label>
                 <br/>
-                <input type="text" name="ticket_subject" id="ticket_subject" value="" title="Ticket subject"/>
+                <input type="text" name="ticket_subject" id="ticket_subject" class="required-entry" value="" title="Ticket subject"/>
             </li>
             <li>
                 <label for="ticket_content"><?php echo $this->__('Content') ?></label>
                 <br>
-                <textarea name="ticket_content" rows="4" cols="100"></textarea>
+                <textarea class="required-entry" name="ticket_content" rows="4" cols="100"></textarea>
             </li>
         </ul>
         <div class="buttons-set">
