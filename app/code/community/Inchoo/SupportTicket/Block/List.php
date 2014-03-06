@@ -19,14 +19,4 @@ class Inchoo_SupportTicket_Block_List extends Mage_Core_Block_Template
         }
         return $customer_registries;
     }
-
-    public function getTicketComments($id) {
-        $comments = null;
-        if ($id != null) {
-            $comments = Mage::getModel('inchoo_supportticket/ticket_comment')
-                                ->getCollection()
-                                ->addFieldToFilter('ticket_id', $id);
-        }
-        return $comments;
-    }
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<layout>
+    <adminhtml_inchoo_supportticket_edit>
+        <reference name="content">
+            <block type="inchoo_supportticket/adminhtml_tickets_edit" template="inchoo/supportticket/edit.phtml" name="edit_tickets" />
+         </reference>
+    </adminhtml_inchoo_supportticket_edit>
+
+</layout>

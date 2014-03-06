@@ -14,7 +14,7 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
     {
         $this->loadLayout();
         $this->renderLayout();
-        Zend_Debug::dump($this->getLayout()->getUpdate()->getHandles());
+        // Zend_Debug::dump($this->getLayout()->getUpdate()->getHandles());
         return $this;
     }
 
@@ -22,7 +22,7 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
     {
         $this->loadLayout();
         $this->renderLayout();
-        Zend_Debug::dump($this->getLayout()->getUpdate()->getHandles());
+        // Zend_Debug::dump($this->getLayout()->getUpdate()->getHandles());
         return $this;
     }
 
@@ -44,6 +44,9 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
 
     public function newticketAction()
     {
+        /*
+            TODO: CHECK IF USER IS LOGGED
+         */
          try {
             $data = $this->getRequest()->getParams();
             $ticketModel = Mage::getModel('inchoo_supportticket/ticket');

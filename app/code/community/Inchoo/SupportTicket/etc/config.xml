@@ -63,4 +63,25 @@
             </updates>
         </layout>
     </frontend>
+    <admin>
+        <routers>
+            <adminhtml>
+                <use>admin</use>
+                <args>
+                    <modules>
+                        <Inchoo_SupportTicket before="Mage_Adminhtml">Inchoo_SupportTicket_Adminhtml</Inchoo_SupportTicket>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <inchoo_supportticket module="inchoo_supportticket">
+                    <file>support_ticket.xml</file>
+                </inchoo_supportticket>
+            </updates>
+        </layout>
+    </adminhtml>
 </config>

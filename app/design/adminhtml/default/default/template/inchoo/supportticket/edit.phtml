@@ -1,0 +1,58 @@
+<?php
+    $ticket = Mage::registry('loaded_ticket');
+    $comments = Mage::helper('inchoo_supportticket')->getTicketComments($ticket->getTicketId());
+?>
+<div class="page-title title-buttons">
+    <h1>
+        <?php echo $this->__('My Tickets') ?>
+    </h1>
+    <button type="button" title="<?php echo $this->__('Back to ticket list') ?>"
+            class="button"
+        onclick="window.location='<?php echo $this->getListTicketsUrl(); ?>';">
+        <span>
+            <span>
+                <?php echo $this->__('Back to ticket list') ?>
+            </span>
+        </span>
+    </button>
+</div>
+<?php if($ticket->getData('ticket_id')): ?>
+    <h3><?php echo $ticket->getSubject(); ?></h3>
+    <p><strong><?php echo $this->__('Content:') ?><br> <?php echo $ticket->getContent(); ?></strong></p>
+    <div>
+    <div>
+        <?php if(count($comments) > 0): ?>
+            <hr>
+            <h4>Comments</h4>
+            <hr>
+            <ul>
+            <?php foreach($comments as $comment): ?>
+                <li>
+                    <b>
+                        <?php echo $comment->getContent(); ?>
+                    </b>
+                    <br>
+                    <?php echo $comment->getAuthor(); ?>
+                    <hr>
+                </li>
+            <?php endforeach ?>
+        <?else: ?>
+            <hr>
+            <h4>
+                No comments for this ticket!
+            </h4>
+            <hr>
+            <ul>
+        <?endif; ?>
+        </ul>
+    </div>
+    </div>
+<?php else: ?>
+    <h3>This ticket does not exist</h3>
+<?endif; ?>
+
+<script type="text/javascript">
+//<![CDATA[
+var dataForm = new VarienForm('form-validate', true);
+//]]>
+</script>
