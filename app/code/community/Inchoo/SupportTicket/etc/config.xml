@@ -44,8 +44,36 @@
                 </setup>
             </inchoo_supportticket_setup>
         </resources>
+        <template>
+            <email>
+                <inchoo_supportticket_email_template translate="label" module="inchoo_supportticket">
+                    <label>Inchoo Email</label>
+                    <file>inchoo_email_template.html</file>
+                    <type>html</type>
+                </inchoo_supportticket_email_template>
+            </email>
+        </template>
     </global>
+    <default>
+        <inchoo_supportticket>
+            <email>
+                <enabled>1</enabled>
+                <template>inchoo_supportticket_email_template</template>
+                <identity>sales</identity>
+            </email>
+        </inchoo_supportticket>
+    </default>
     <frontend>
+        <events>
+            <ticket_added_event_handle>
+                <observers>
+                    <ticket_observer>
+                        <class>inchoo_supportticket/observer</class>
+                        <method>sendMailToAdmin</method>
+                    </ticket_observer>
+                </observers>
+            </ticket_added_event_handle>
+        </events>
         <routers>
             <inchoo_tickets>
                 <use>standard</use>

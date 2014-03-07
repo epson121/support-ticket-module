@@ -27,4 +27,45 @@ class Inchoo_SupportTicket_Adminhtml_Inchoo_SupportticketController extends Mage
         return $this;
     }
 
+    public function updateStatusAction() {
+         try {
+            $ticketId = $this->getRequest()->getParam('ticket_id');
+            if($this->getRequest()->getPost() && !empty($ticketId)) {
+                $ticketModel = Mage::getModel('inchoo_supportticket/ticket')
+                                            ->load($ticketId, 'ticket_id');
+                $ticketModel->disableTicket($ticketId);
+                $ticketModel->save();
+                $successMessage = Mage::helper('inchoo_supportticket')->__('Status updated');
+                Mage::getSingleton('core/session')->addSuccess($successMessage);
+            } else{
+                //throw new Exception("Insufficient Data provided");
+            }
+        } catch (Mage_Core_Exception $e) {
+            Mage::getSingleton('core/session')->addError($e->getMessage());
+            $this->_redirect('*/*/');
+        }
+        $this->_redirect("adminhtml/inchoo_supportticket/index");
+    }
+
+     public function newCommentAction() {
+         try {
+            $data = $this->getRequest()->getParams();
+            $ticketCommentModel = Mage::getModel('inchoo_supportticket/ticket_comment');
+            $customer = Mage::getSingleton('admin/session')->getUser();
+
+            if($this->getRequest()->getPost() && !empty($data)) {
+                $ticketCommentModel->updateTicketCommentData($customer, $data);
+                $ticketCommentModel->save();
+                $successMessage = Mage::helper('inchoo_supportticket')->__('New comment added');
+                Mage::getSingleton('core/session')->addSuccess($successMessage);
+            } else{
+                //throw new Exception("Insufficient Data provided");
+            }
+        } catch (Mage_Core_Exception $e) {
+            Mage::getSingleton('core/session')->addError($e->getMessage());
+            $this->_redirect('*/*/');
+        }
+        $this->_redirectReferer();
+    }
+
 }

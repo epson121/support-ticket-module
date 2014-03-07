@@ -1,6 +1,6 @@
 <?php
     $ticket = Mage::registry('loaded_ticket');
-    $comments = $this->getTicketComments($ticket->getTicketId());
+    $comments = Mage::helper('inchoo_supportticket')->getTicketComments($ticket->getTicketId());
 ?>
 <div class="page-title title-buttons">
     <h1>
@@ -17,48 +17,70 @@
     </button>
 </div>
 <?php if($ticket->getData('ticket_id')): ?>
-    <h3><?php echo $ticket->getSubject(); ?></h3>
-    <p><strong><?php echo $this->__('Content:') ?><br> <?php echo $ticket->getContent(); ?></strong></p>
-    <div>
-    <div>
-        <hr>
-        <h4>Comments</h4>
-        <hr>
-        <ul>
-        <?php foreach($comments as $comment): ?>
-            <li>
-                <b>
-                    <?php echo $comment->getContent(); ?>
-                </b>
-                <br>
-                <?php echo $comment->getAuthor(); ?>
-                <hr>
-            </li>
-        <?php endforeach ?>
-        </ul>
-    </div>
-    </div>
-
-    <form action="<?php echo $this->getUrl('tickets/support/newComment/')?>" method="post" id="form-validate">
-        <fieldset>
-            <?php echo $this->getBlockHtml('formkey')?>
-            <input type="hidden" name="ticket_id" value="<?php echo $ticket->getTicketId(); ?>">
-            <ul class="form-list">
-                <li>
-                    <label for="ticket_comment_content"><?php echo $this->__('Comment') ?></label>
-                    <br>
-                    <textarea class="required-entry" name="ticket_comment_content" rows="4" cols="100"></textarea>
-                </li>
-            </ul>
-            <div class="buttons-set">
-                <button type="submit" title="Add comment" class="button">
-                    <span>
-                        <span><?php echo $this->__('Add comment') ?></span>
+<div class="addresses-list">
+    <div >
+        <h2>Ticket information</h2>
+        <ol>
+            <li class="item">
+                    <span style="float:left;font-weight:bold;">
+                        <?php echo $ticket->getSubject(); ?>
                     </span>
-                </button>
-            </div>
-        </fieldset>
-    </form>
+                    <span style="float:right;">
+                        <?php echo $ticket->getCreatedAt(); ?>
+                    </span>
+                    <br>
+                    <hr>
+                    <?php echo $ticket->getContent(); ?>
+            </li>
+        </ol>
+    </div>
+    <div style="margin-right:15%;">
+        <h2>Comments</h2>
+         <ol>
+            <?php foreach($comments as $comment): ?>
+                <li class="item">
+                     <span style="float:left;font-weight:bold;">
+                        <?php echo $comment->getAuthor(); ?>
+                    </span>
+                    <span style="float:right;">
+                        <?php echo $comment->getCreatedAt(); ?>
+                    </span>
+                    <br>
+                    <hr>
+                    <?php echo $comment->getContent(); ?>
+                </li>
+            </li>
+            <?php endforeach ?>
+        </ol>
+    </div>
+</div>
+    <?php if($ticket->getStatus() == 1): ?>
+        <form action="<?php echo $this->getUrl('tickets/support/newComment/')?>" method="post" id="form-validate">
+            <fieldset>
+                <div class="fieldset">
+                    <?php echo $this->getBlockHtml('formkey')?>
+                    <h2 class="legend">Add a comment:</h2>
+                    <?php echo $this->getBlockHtml('formkey')?>
+                    <ul class="form-list">
+                        <input type="hidden" name="ticket_id" value="<?php echo $ticket->getTicketId(); ?>">
+                        <li class="wide">
+                           <label for="ticket_comment_content"><?php echo $this->__('Comment:') ?></label>
+                        <br>
+                        <textarea class="required-entry" name="ticket_comment_content" rows="4" cols="100"></textarea>
+                        </li>
+                <div class="buttons-set">
+                    <button type="submit" title="Add comment" class="button">
+                        <span>
+                            <span><?php echo $this->__('Add comment') ?></span>
+                        </span>
+                    </button>
+                </div>
+            </fieldset>
+        </form>
+    <?php else: ?>
+        <br>
+        <h3>This ticket is closed.</h3>
+    <?endif; ?>
 <?php else: ?>
     <h3>This ticket does not exist</h3>
 <?endif; ?>

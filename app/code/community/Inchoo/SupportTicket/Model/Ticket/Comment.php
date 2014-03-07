@@ -10,21 +10,13 @@ class Inchoo_SupportTicket_Model_Ticket_Comment extends Mage_Core_Model_Abstract
     }
 
 
-    public function updateTicketCommentData(Mage_Customer_Model_Customer $customer, $data)
+    public function updateTicketCommentData($customer, $data)
     {
         try{
             if(!empty($data)) {
                 //$type_id = Mage::getModel('inchoo_supportticket/ticket')->load($data['type_id'], 'code')->getTypeId();
                 $storeId = Mage::app()->getStore()->getStoreId();
-                if ($storeId === 0) { // request sent by admin
-                    // userArray = Mage::getSingleton('admin/session')->getData();
-                    // $userUsername = $user->getUser()->getUsername();
-                    $this->setAuthor(Mage::getSingleton('admin/session')->getData()
-                                                                        ->getUser()
-                                                                        ->getUsername());
-                } else {
-                    $this->setAuthor($customer->getName());
-                }
+                $this->setAuthor($customer->getName());
                 $this->setTicketId($data['ticket_id']);
                 $this->setContent($data['ticket_comment_content']);
                 $this->setCreatedAt(date("Y-m-d H:i:s"));

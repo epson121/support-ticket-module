@@ -1,55 +1,119 @@
 <?php
     $ticket = Mage::registry('loaded_ticket');
     $comments = Mage::helper('inchoo_supportticket')->getTicketComments($ticket->getTicketId());
+    $backUrl = Mage::helper('adminhtml')->getUrl("adminhtml/inchoo_supportticket/index");
 ?>
-<div class="page-title title-buttons">
-    <h1>
-        <?php echo $this->__('My Tickets') ?>
-    </h1>
-    <button type="button" title="<?php echo $this->__('Back to ticket list') ?>"
-            class="button"
-        onclick="window.location='<?php echo $this->getListTicketsUrl(); ?>';">
-        <span>
-            <span>
-                <?php echo $this->__('Back to ticket list') ?>
-            </span>
-        </span>
-    </button>
-</div>
 <?php if($ticket->getData('ticket_id')): ?>
-    <h3><?php echo $ticket->getSubject(); ?></h3>
-    <p><strong><?php echo $this->__('Content:') ?><br> <?php echo $ticket->getContent(); ?></strong></p>
-    <div>
-    <div>
-        <?php if(count($comments) > 0): ?>
-            <hr>
-            <h4>Comments</h4>
-            <hr>
-            <ul>
-            <?php foreach($comments as $comment): ?>
-                <li>
-                    <b>
-                        <?php echo $comment->getContent(); ?>
-                    </b>
-                    <br>
-                    <?php echo $comment->getAuthor(); ?>
+<div class="middle">
+    <div class="columns">
+        <div class="side-col">
+            <div class="side-col" >
+                <h3>Ticket menu</h3>
+                <ul class="tabs">
+                    <li>
+                        <span>
+                            Ticket info
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-col">
+            <div class="main-col-inner">
+                <div class="content-header">
+                    <h3><?php echo $ticket->getSubject()."  (".$ticket->getCreatedAt().")"; ?></h3>
+                    <p class="form-buttons">
+                        <button style="float:right;" type="button" title="<?php echo $this->__('Back to list') ?>"
+                                class="button scalable"
+                            onclick="window.location='<?php echo $backUrl; ?>';">
+                            <span>
+                                <span>
+                                    <?php echo $this->__('Back to ticket list') ?>
+                                </span>
+                            </span>
+                        </button>
+                    </p>
+                </div>
+            </div>
+            <div>
+                <p style="font-size:1.5em;">
+                    <?php echo $ticket->getContent(); ?>
+                </p>
+            </div>
+            <div style="margin-right:20%;margin-top:5%;">
+                <?php if(count($comments) > 0): ?>
+                    <h3>Comments:</h3>
+                    <?php foreach($comments as $comment): ?>
+                    <div style="margin-top:2%;">
+                        <span><?php echo $comment->getContent(); ?></span>
+                        <br>
+                        <span>
+                            <b>
+                                <?php echo $comment->getAuthor(); ?>
+                                <br>
+                                <?php echo $comment->getCreatedAt(); ?>
+                            </b>
+                        </span>
+                        <hr>
+                        <br>
+                    </div>
+                    <?php endforeach ?>
+                <?else: ?>
                     <hr>
-                </li>
-            <?php endforeach ?>
-        <?else: ?>
-            <hr>
-            <h4>
-                No comments for this ticket!
-            </h4>
-            <hr>
-            <ul>
+                    <h4>
+                        No comments for this ticket!
+                    </h4>
+                    <hr>
+                    <ul>
+                <?endif; ?>
+                </ul>
+            </div>
+            <?php if($ticket->getStatus() == 1): ?>
+             <form action="<?php echo $this->getUrl('adminhtml/inchoo_supportticket/newComment')?>" method="post" id="form-validate">
+                <fieldset>
+                    <?php echo $this->getBlockHtml('formkey')?>
+                    <input type="hidden" name="ticket_id" value="<?php echo $ticket->getTicketId(); ?>">
+                    <ul class="form-list">
+                        <li>
+                            <label for="ticket_comment_content"><?php echo $this->__('Comment') ?></label>
+                            <br>
+                            <textarea class="required-entry" name="ticket_comment_content" rows="4" cols="100"></textarea>
+                        </li>
+                    </ul>
+                    <div class="buttons-set">
+                        <button type="submit" title="Add comment" class="button">
+                            <span>
+                                <span><?php echo $this->__('Add comment') ?></span>
+                            </span>
+                        </button>
+                    </div>
+                </fieldset>
+            </form>
+            <form action="<?php echo $this->getUrl('adminhtml/inchoo_supportticket/updateStatus/')?>" method="post" id="form-validate">
+                    <fieldset>
+                        <?php echo $this->getBlockHtml('formkey')?>
+                        <input type="hidden" name="ticket_id" value="<?php echo $ticket->getTicketId(); ?>">
+                        <div class="buttons-set" style="float:right;">
+                            <button type="submit" title="Close this Support Ticket" class="button scalable save">
+                                <span>
+                                    <span><?php echo $this->__('Close this Support Ticket') ?></span>
+                                </span>
+                            </button>
+                        </div>
+                    </fieldset>
+                    </form>
+            <?php else: ?>
+                <br>
+                <h3>This ticket is closed.</h3>
+            <?endif; ?>
+        <?php else: ?>
+            <h3>This ticket does not exist</h3>
         <?endif; ?>
-        </ul>
+                </div>
     </div>
-    </div>
-<?php else: ?>
-    <h3>This ticket does not exist</h3>
-<?endif; ?>
+</div>
+
+    
 
 <script type="text/javascript">
 //<![CDATA[

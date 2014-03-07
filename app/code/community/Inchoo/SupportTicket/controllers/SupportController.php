@@ -3,31 +3,26 @@
 class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_Action
 {
 
-     public function indexAction()
-    {
+    public function indexAction() {
         $this->loadLayout();
         $this->renderLayout();
         return $this;
     }
 
-    public function listAction()
-    {
+    public function listAction() {
         $this->loadLayout();
         $this->renderLayout();
-        // Zend_Debug::dump($this->getLayout()->getUpdate()->getHandles());
         return $this;
     }
 
-    public function newAction()
-    {
+    public function newAction() {
         $this->loadLayout();
         $this->renderLayout();
         // Zend_Debug::dump($this->getLayout()->getUpdate()->getHandles());
         return $this;
     }
 
-    public function viewAction()
-    {
+    public function viewAction() {
         $ticketId = $this->getRequest()->getParam('ticket_id');
         if ($ticketId) {
             $ticket = Mage::getModel('inchoo_supportticket/ticket');
@@ -42,12 +37,8 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
         return $this;
     }
 
-    public function newticketAction()
-    {
-        /*
-            TODO: CHECK IF USER IS LOGGED
-         */
-         try {
+    public function newticketAction() {
+        try {
             $data = $this->getRequest()->getParams();
             $ticketModel = Mage::getModel('inchoo_supportticket/ticket');
             $customer = Mage::getSingleton('customer/session')->getCustomer();
@@ -56,9 +47,10 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
                 $ticketModel->updateTicketData($customer, $data);
                 //var_dump($ticketModel);
                 $ticketModel->save();
-                $successMessage = Mage::helper('inchoo_supportticket')->__('Registry Successfully Created');
+                $successMessage = Mage::helper('inchoo_supportticket')->__('New ticket created');
                 Mage::getSingleton('core/session')->addSuccess($successMessage);
-            } else{
+                Mage::dispatchEvent('ticket_added_event_handle', array('customer' =>$customer, 'data' =>$data));
+            } else {
                 //throw new Exception("Insufficient Data provided");
             }
         } catch (Mage_Core_Exception $e) {
@@ -68,8 +60,7 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
         $this->_redirect('tickets/support/list');
     }
 
-    public function newCommentAction()
-    {
+    public function newCommentAction() {
          try {
             $data = $this->getRequest()->getParams();
             $ticketCommentModel = Mage::getModel('inchoo_supportticket/ticket_comment');
@@ -78,9 +69,9 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
             if($this->getRequest()->getPost() && !empty($data)) {
                 $ticketCommentModel->updateTicketCommentData($customer, $data);
                 $ticketCommentModel->save();
-                $successMessage = Mage::helper('inchoo_supportticket')->__('Registry Successfully Created');
+                $successMessage = Mage::helper('inchoo_supportticket')->__('New comment added');
                 Mage::getSingleton('core/session')->addSuccess($successMessage);
-            } else{
+            } else {
                 //throw new Exception("Insufficient Data provided");
             }
         } catch (Mage_Core_Exception $e) {
@@ -89,4 +80,12 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
         }
         $this->_redirectReferer();
     }
+
+    public function preDispatch() {
+        parent::preDispatch();
+        if (!Mage::getSingleton('customer/session')->authenticate($this)) {
+            $this->setFlag('', 'no-dispatch', true);
+        }
+    }
+
 }

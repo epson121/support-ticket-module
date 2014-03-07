@@ -28,4 +28,17 @@ class Inchoo_SupportTicket_Model_Ticket extends Mage_Core_Model_Abstract
         }
         return $this;
     }
+
+    public function disableTicket($ticketId) {
+        try{
+            if(!empty($ticketId)) {
+                $this->setStatus(0);
+            } else {
+                //throw new Exception("Error Processing Request: Insufficient Data Provided");
+            }
+        } catch (Exception $e){
+            Mage::logException($e);
+        }
+        return $this;
+    }
 }

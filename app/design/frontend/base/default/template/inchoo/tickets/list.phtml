@@ -23,23 +23,39 @@
     <h2><?php echo $this->__('You have no tickets.') ?></h2>
     </a>
     <?php else: ?>
-        <ul>
-            <?php foreach($_collection as $ticket): ?>
-                <li>
-                    <p>
-                    <h3><?php echo $ticket->getTicketId(); ?></h3>
-                        <strong>
-                            <?php echo $this->__('Subject:')?>
+        <table class="data-table" id="tickets_table" >
+            <thead>
+                <tr class="first last">
+                    <th>Ticket #</th>
+                    <th>Subject</th>
+                    <th><span class="nobr">Status</span></th>
+                    <th><span class="nobr">View</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($_collection as $ticket): ?>
+                    <tr>
+                        <td>
+                            <?php echo $ticket->getTicketId(); ?>
+                        </td>
+                        <td>
                             <?php echo $ticket->getSubject(); ?>
-                        </strong>
-                        <br>
-                    <a href="<?php echo $this->getUrl('tickets/support/view', array('_query' => array('ticket_id' => $ticket->getTicketId()))) ?>">
-                        <?php echo $this->__('View Ticket') ?>
-                    </a>
-                    </p>
-                </li>
-                <br>
-            <?php endforeach; ?>
-        </ul>
+                        </td>
+                        <td>
+                            <?php if ($ticket->getStatus() == 0): ?>
+                                Closed
+                            <?php else: ?>
+                                Open
+                            <?php endif ?>
+                        </td>
+                        <td>
+                            <a href="<?php echo $this->getUrl('tickets/support/view', array('_query' => array('ticket_id' => $ticket->getTicketId()))) ?>">
+                                <?php echo $this->__('View') ?>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     <?php endif; ?>
 </div>
