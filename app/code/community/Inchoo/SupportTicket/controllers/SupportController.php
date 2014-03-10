@@ -9,10 +9,23 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
         return $this;
     }
 
+    /**
+     * View opened issues
+     * @return [type] [description]
+     */
     public function listAction() {
         $this->loadLayout();
         $this->renderLayout();
         return $this;
+    }
+
+    public function testAction() {
+        header('Content-Type: text/xml');
+        echo $config = Mage::getConfig()
+        ->loadModulesConfiguration('system.xml')
+        ->getNode()
+        ->asXML();
+        exit;
     }
 
     public function newAction() {
@@ -24,16 +37,28 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
 
     public function viewAction() {
         $ticketId = $this->getRequest()->getParam('ticket_id');
+        $isArchive = $this->getRequest()->getParam('archive');
         if ($ticketId) {
             $ticket = Mage::getModel('inchoo_supportticket/ticket');
             if ($ticket->load($ticketId)) {
                 Mage::register('loaded_ticket', $ticket);
+                $isArchive ? Mage::register('archive', true) : Mage::register('archive', false);
                 $this->loadLayout();
                 $this->renderLayout();
                 return $this;
             }
         }
         $this->_forward('noroute');
+        return $this;
+    }
+
+    /**
+     * View opened issues
+     * @return [type] [description]
+     */
+    public function archiveAction() {
+        $this->loadLayout();
+        $this->renderLayout();
         return $this;
     }
 
@@ -49,7 +74,7 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
                 $ticketModel->save();
                 $successMessage = Mage::helper('inchoo_supportticket')->__('New ticket created');
                 Mage::getSingleton('core/session')->addSuccess($successMessage);
-                Mage::dispatchEvent('ticket_added_event_handle', array('customer' =>$customer, 'data' =>$data));
+                Mage::dispatchEvent('ticket_added_event_handle', array('customer' => $customer, 'data' => $data));
             } else {
                 //throw new Exception("Insufficient Data provided");
             }

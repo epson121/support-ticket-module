@@ -50,7 +50,7 @@ class Inchoo_SupportTicket_Block_Adminhtml_Tickets_Grid extends Mage_Adminhtml_B
             'header'=> Mage::helper('inchoo_supportticket')->__('Created at'),
             'type' => 'text',
             'width' => '170px',
-            'index' => 'author',
+            'index' => 'created_at',
             ));
         return parent::_prepareColumns();
     }

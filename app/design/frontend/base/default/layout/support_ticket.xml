@@ -32,4 +32,12 @@
         </reference>
     </inchoo_tickets_support_view>
 
+    <inchoo_tickets_support_archive>
+        <update handle="customer_account"/>
+        <reference name="content">
+            <block name="tickets.archive" type="inchoo_supportticket/list"
+                   template="inchoo/tickets/archive.phtml" as="tickets_archive"/>
+        </reference>
+    </inchoo_tickets_support_archive>
+
 </layout>

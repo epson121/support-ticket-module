@@ -1,5 +1,6 @@
 <?php
     $ticket = Mage::registry('loaded_ticket');
+    $isArchive = Mage::registry('archive');
     $comments = Mage::helper('inchoo_supportticket')->getTicketComments($ticket->getTicketId());
 ?>
 <div class="page-title title-buttons">
@@ -8,10 +9,12 @@
     </h1>
     <button type="button" title="<?php echo $this->__('Back to ticket list') ?>"
             class="button"
-        onclick="window.location='<?php echo $this->getListTicketsUrl(); ?>';">
+             onclick="window.location='<?php echo  $isArchive ? $this->getArchiveUrl() :
+                                                                $this->getListTicketsUrl(); ?>';">
         <span>
             <span>
-                <?php echo $this->__('Back to ticket list') ?>
+                <?php echo $isArchive ? $this->__('Back to archive') :
+                                        $this->__('Back to ticket list') ?>
             </span>
         </span>
     </button>

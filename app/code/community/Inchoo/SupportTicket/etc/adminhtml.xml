@@ -32,24 +32,3 @@
         </resources>
     </acl>
 </config>
-
-<!--  <menu>
-             <sales>
-                <children>
-                    <order>
-                        <children>
-                            <orderView translate="title" module="sales">
-                                <title>View Orders</title>
-                                <action>adminhtml/sales_order</action>
-                                <sort_order>1</sort_order>
-                            </orderView>
-                            <orderNew translate="title" module="sales">
-                         <title>New Order</title>
-                         <action>adminhtml/sales_order_create/index</action>
-                         <sort_order>2</sort_order>
-                            </orderNew>
-                         </children>
-                </order>
-               </children>
-           </sales>
-        </menu> -->

@@ -1,5 +1,5 @@
 <?php
-    $_collection = $this->getTicketList();
+    $_collection = $this->getArchivedList();
     $helper = Mage::helper('inchoo_supportticket')
 ?>
 <div class="page-title title-buttons">
@@ -15,21 +15,20 @@
             </span>
         </span>
     </button>
-    <button type="button" title="<?php echo $this->__('Archive') ?>"
+    <button type="button" title="<?php echo $this->__('Back') ?>"
             class="button"
-            onclick="window.location='<?php echo $this->getArchiveUrl(); ?>';">
+            onclick="window.location='<?php echo $this->getListTicketsUrl(); ?>';">
         <span>
             <span>
-                <?php echo $this->__('Archive') ?>
+                <?php echo $this->__('Back') ?>
             </span>
         </span>
     </button>
-
 </div>
 
 <div class="customer-list">
     <?php if(!$_collection->count()): ?>
-    <h2><?php echo $this->__('You have no tickets.') ?></h2>
+    <h2><?php echo $this->__('You have no archived tickets.') ?></h2>
     </a>
     <?php else: ?>
         <table class="data-table" id="tickets_table" >
@@ -38,6 +37,7 @@
                     <th>Ticket #</th>
                     <th>Subject</th>
                     <th><span class="nobr">Status</span></th>
+                    <th><span class="nobr">Created</span></th>
                     <th><span class="nobr"></span></th>
                 </tr>
             </thead>
@@ -58,7 +58,10 @@
                             <?php endif ?>
                         </td>
                         <td>
-                            <a href="<?php echo $this->getUrl('tickets/support/view', array('_query' => array('ticket_id' => $ticket->getTicketId()))) ?>">
+                            <?php echo date('j. n. Y. H:i', strtotime($ticket->getCreatedAt())); ?>
+                        </td>
+                        <td>
+                            <a href="<?php echo $this->getUrl('tickets/support/view', array('_query' => array('ticket_id' => $ticket->getTicketId(), 'archive'=> true))) ?>">
                                 <?php echo $this->__('View') ?>
                             </a>
                         </td>

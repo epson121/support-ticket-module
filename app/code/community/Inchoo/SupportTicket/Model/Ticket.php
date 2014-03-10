@@ -41,4 +41,14 @@ class Inchoo_SupportTicket_Model_Ticket extends Mage_Core_Model_Abstract
         }
         return $this;
     }
+
+    public function deleteTicket($ticketId) {
+        try {
+            if (!empty($ticketId)) {
+                $this->delete();
+            }
+        } catch (Exception $e) {
+            Mage::logException($e);
+        }
+    }
 }

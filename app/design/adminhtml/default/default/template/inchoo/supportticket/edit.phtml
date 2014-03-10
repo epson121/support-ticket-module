@@ -89,8 +89,8 @@
                     </div>
                 </fieldset>
             </form>
-            <form action="<?php echo $this->getUrl('adminhtml/inchoo_supportticket/updateStatus/')?>" method="post" id="form-validate">
-                    <fieldset>
+                <form action="<?php echo $this->getUrl('adminhtml/inchoo_supportticket/updateStatus/')?>" method="post" id="form-validate">
+                        <fieldset>
                         <?php echo $this->getBlockHtml('formkey')?>
                         <input type="hidden" name="ticket_id" value="<?php echo $ticket->getTicketId(); ?>">
                         <div class="buttons-set" style="float:right;">
@@ -101,7 +101,20 @@
                             </button>
                         </div>
                     </fieldset>
-                    </form>
+                </form>
+                <form action="<?php echo $this->getUrl('adminhtml/inchoo_supportticket/delete/')?>" method="post" id="form-validate">
+                        <fieldset>
+                        <?php echo $this->getBlockHtml('formkey')?>
+                        <input type="hidden" name="ticket_id" value="<?php echo $ticket->getTicketId(); ?>">
+                        <div class="buttons-set" style="float:right;">
+                            <button type="submit" title="Delete ticket" class="button scalable save">
+                                <span>
+                                    <span><?php echo $this->__('Delete ticket') ?></span>
+                                </span>
+                            </button>
+                        </div>
+                    </fieldset>
+                </form>
             <?php else: ?>
                 <br>
                 <h3>This ticket is closed.</h3>
@@ -112,8 +125,6 @@
                 </div>
     </div>
 </div>
-
-    
 
 <script type="text/javascript">
 //<![CDATA[

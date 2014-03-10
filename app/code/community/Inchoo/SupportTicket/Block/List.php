@@ -10,15 +10,33 @@ class Inchoo_SupportTicket_Block_List extends Mage_Core_Block_Template
         return $this->getUrl('tickets/support/list', array('_secure'=>true));
     }
 
+    public function getArchiveUrl() {
+        return $this->getUrl('tickets/support/archive', array('_secure'=>true));
+    }
+
     public function getTicketList($value='') {
         $currentCustomer = Mage::getSingleton('customer/session')->getCustomer();
         $website_id = Mage::app()->getWebsite()->getId();
         if ($currentCustomer) {
-            $customer_registries = Mage::getModel('inchoo_supportticket/ticket')
+            $ticketList = Mage::getModel('inchoo_supportticket/ticket')
                                 ->getCollection()
+                                ->addFieldToFilter('status', 1)
                                 ->addFieldToFilter('customer_id', $currentCustomer->getId())
                                 ->addFieldToFilter('website_id', $website_id);
         }
-        return $customer_registries;
+        return $ticketList;
+    }
+
+    public function getArchivedList($value='') {
+        $currentCustomer = Mage::getSingleton('customer/session')->getCustomer();
+        $website_id = Mage::app()->getWebsite()->getId();
+        if ($currentCustomer) {
+            $ticketList = Mage::getModel('inchoo_supportticket/ticket')
+                                ->getCollection()
+                                ->addFieldToFilter('status', 0)
+                                ->addFieldToFilter('customer_id', $currentCustomer->getId())
+                                ->addFieldToFilter('website_id', $website_id);
+        }
+        return $ticketList;
     }
 }

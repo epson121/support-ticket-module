@@ -27,6 +27,19 @@ class Inchoo_SupportTicket_Adminhtml_Inchoo_SupportticketController extends Mage
         return $this;
     }
 
+    public function deleteAction() {
+        $ticketId = $this->getRequest()->getParam('ticket_id');
+        if ($ticketId) {
+            $ticket = Mage::getModel('inchoo_supportticket/ticket');
+            if ($ticket->load($ticketId)) {
+                $ticket->deleteTicket($ticketId);
+                $this->_redirect("adminhtml/inchoo_supportticket/index");
+                return $this;
+            }
+        }
+        $this->_redirect('noroute');
+    }
+
     public function updateStatusAction() {
          try {
             $ticketId = $this->getRequest()->getParam('ticket_id');

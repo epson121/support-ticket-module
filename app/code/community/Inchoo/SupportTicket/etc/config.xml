@@ -59,7 +59,6 @@
             <email>
                 <enabled>1</enabled>
                 <template>inchoo_supportticket_email_template</template>
-                <identity>sales</identity>
             </email>
         </inchoo_supportticket>
     </default>
