@@ -2,16 +2,19 @@
 
 class Inchoo_SupportTicket_Adminhtml_Inchoo_SupportticketController extends Mage_Adminhtml_Controller_Action
 {
+    /**
+     * Show grid with all tickets
+     */
     public function indexAction() {
-         // $this->loadLayout();
-         // $this->renderLayout();
-
         $this->loadLayout()->_setActiveMenu('customer');
-        // Zend_Debug::dump($this->getLayout()->getUpdate()->getHandles());
         $this->_addContent($this->getLayout()->createBlock('inchoo_supportticket/adminhtml_tickets'));
         $this->renderLayout();
     }
 
+    /**
+     * Show individual ticket with its comments
+     * @return [type] [description]
+     */
     public function editAction() {
         $ticketId = $this->getRequest()->getParam('ticket_id');
         if ($ticketId) {
@@ -27,6 +30,9 @@ class Inchoo_SupportTicket_Adminhtml_Inchoo_SupportticketController extends Mage
         return $this;
     }
 
+    /**
+     * called on button click in editAction, deletes the ticket
+     */
     public function deleteAction() {
         $ticketId = $this->getRequest()->getParam('ticket_id');
         if ($ticketId) {
@@ -40,18 +46,20 @@ class Inchoo_SupportTicket_Adminhtml_Inchoo_SupportticketController extends Mage
         $this->_redirect('noroute');
     }
 
+    /**
+     * Change status of the ticket (closes the ticket)
+     */
     public function updateStatusAction() {
          try {
             $ticketId = $this->getRequest()->getParam('ticket_id');
             if($this->getRequest()->getPost() && !empty($ticketId)) {
-                $ticketModel = Mage::getModel('inchoo_supportticket/ticket')
-                                            ->load($ticketId, 'ticket_id');
+                $ticketModel = Mage::getModel('inchoo_supportticket/ticket')->load($ticketId, 'ticket_id');
                 $ticketModel->disableTicket($ticketId);
                 $ticketModel->save();
                 $successMessage = Mage::helper('inchoo_supportticket')->__('Status updated');
                 Mage::getSingleton('core/session')->addSuccess($successMessage);
             } else{
-                //throw new Exception("Insufficient Data provided");
+                throw new Exception("Insufficient Data provided");
             }
         } catch (Mage_Core_Exception $e) {
             Mage::getSingleton('core/session')->addError($e->getMessage());
@@ -60,7 +68,10 @@ class Inchoo_SupportTicket_Adminhtml_Inchoo_SupportticketController extends Mage
         $this->_redirect("adminhtml/inchoo_supportticket/index");
     }
 
-     public function newCommentAction() {
+    /**
+     * Called when new comment is addded
+     */
+    public function newCommentAction() {
          try {
             $data = $this->getRequest()->getParams();
             $ticketCommentModel = Mage::getModel('inchoo_supportticket/ticket_comment');

@@ -2,6 +2,7 @@
 
 class Inchoo_SupportTicket_Block_List extends Mage_Core_Block_Template
 {
+
     public function getAddTicketUrl() {
         return $this->getUrl('tickets/support/new', array('_secure'=>true));
     }
@@ -14,6 +15,9 @@ class Inchoo_SupportTicket_Block_List extends Mage_Core_Block_Template
         return $this->getUrl('tickets/support/archive', array('_secure'=>true));
     }
 
+    /**
+     * Get opened tickets
+     */
     public function getTicketList($value='') {
         $currentCustomer = Mage::getSingleton('customer/session')->getCustomer();
         $website_id = Mage::app()->getWebsite()->getId();
@@ -27,6 +31,9 @@ class Inchoo_SupportTicket_Block_List extends Mage_Core_Block_Template
         return $ticketList;
     }
 
+    /**
+     * Get closed (archived) tickets
+     */
     public function getArchivedList($value='') {
         $currentCustomer = Mage::getSingleton('customer/session')->getCustomer();
         $website_id = Mage::app()->getWebsite()->getId();

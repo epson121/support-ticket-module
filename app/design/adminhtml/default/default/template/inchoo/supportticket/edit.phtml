@@ -58,15 +58,13 @@
                         <br>
                     </div>
                     <?php endforeach ?>
-                <?else: ?>
-                    <hr>
-                    <h4>
-                        No comments for this ticket!
-                    </h4>
-                    <hr>
-                    <ul>
-                <?endif; ?>
-                </ul>
+                    <?else: ?>
+                        <hr>
+                        <h4>
+                            No comments for this ticket!
+                        </h4>
+                        <hr>
+                    <?endif; ?>
             </div>
             <?php if($ticket->getStatus() == 1): ?>
              <form action="<?php echo $this->getUrl('adminhtml/inchoo_supportticket/newComment')?>" method="post" id="form-validate">

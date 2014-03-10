@@ -9,6 +9,10 @@ class Inchoo_SupportTicket_Block_Adminhtml_Tickets_Grid extends Mage_Adminhtml_B
         $this->setDefaultSort('ticket_id');
     }
 
+    /**
+     * Get all tickets for display in admin grid.
+     * @return
+     */
     protected function _prepareCollection() {
         $website_id = Mage::app()->getWebsite()->getId();
         $collection = Mage::getModel('inchoo_supportticket/ticket')
@@ -16,12 +20,12 @@ class Inchoo_SupportTicket_Block_Adminhtml_Tickets_Grid extends Mage_Adminhtml_B
         $this->setCollection($collection);
         parent::_prepareCollection();
         return $this;
-        //  $collection = Mage::getResourceModel($this->_getCollectionClass());
-        // $collection->getSelect()->joinLeft('sales_flat_order_payment', 'sales_flat_order_payment.parent_id = main_table.entity_id',array('method','cc_last4'));
-        // $this->setCollection($collection);
-        // return parent::_prepareCollection();
     }
 
+    /**
+     * Set columns to display in grid
+     * @return
+     */
     protected function _prepareColumns()
     {
         $this->addColumn('ticket_id', array(
@@ -55,8 +59,10 @@ class Inchoo_SupportTicket_Block_Adminhtml_Tickets_Grid extends Mage_Adminhtml_B
         return parent::_prepareColumns();
     }
 
-    public function getRowUrl($row)
-    {
+    /**
+     * on row click, go to edit route and send ticket_id as parameter
+     */
+    public function getRowUrl($row) {
         return $this->getUrl("*/*/edit", array('ticket_id' => $row->getTicketId()));
     }
 

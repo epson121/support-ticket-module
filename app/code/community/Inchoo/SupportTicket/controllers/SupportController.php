@@ -10,7 +10,7 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
     }
 
     /**
-     * View opened issues
+     * View opened tickets
      * @return [type] [description]
      */
     public function listAction() {
@@ -19,15 +19,18 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
         return $this;
     }
 
-    public function testAction() {
-        header('Content-Type: text/xml');
-        echo $config = Mage::getConfig()
-        ->loadModulesConfiguration('system.xml')
-        ->getNode()
-        ->asXML();
-        exit;
-    }
+    // public function testAction() {
+    //     header('Content-Type: text/xml');
+    //     echo $config = Mage::getConfig()
+    //     ->loadModulesConfiguration('system.xml')
+    //     ->getNode()
+    //     ->asXML();
+    //     exit;
+    // }
 
+    /**
+     * Create new ticket
+     */
     public function newAction() {
         $this->loadLayout();
         $this->renderLayout();
@@ -35,6 +38,9 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
         return $this;
     }
 
+    /**
+     * View individual ticket
+     */
     public function viewAction() {
         $ticketId = $this->getRequest()->getParam('ticket_id');
         $isArchive = $this->getRequest()->getParam('archive');
@@ -53,8 +59,7 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
     }
 
     /**
-     * View opened issues
-     * @return [type] [description]
+     * View closed (archived) tickets
      */
     public function archiveAction() {
         $this->loadLayout();
@@ -62,6 +67,10 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
         return $this;
     }
 
+    /**
+     * Receives the POST from newAction and saves the ticket
+     * Dispatches the event for sending email notification
+     */
     public function newticketAction() {
         try {
             $data = $this->getRequest()->getParams();
@@ -70,13 +79,14 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
 
             if($this->getRequest()->getPost() && !empty($data)) {
                 $ticketModel->updateTicketData($customer, $data);
-                //var_dump($ticketModel);
                 $ticketModel->save();
                 $successMessage = Mage::helper('inchoo_supportticket')->__('New ticket created');
                 Mage::getSingleton('core/session')->addSuccess($successMessage);
-                Mage::dispatchEvent('ticket_added_event_handle', array('customer' => $customer, 'data' => $data));
+
+                // used for sending the email
+                Mage::dispatchEvent('ticket_added_event_handle', array('customer' => $customer, 'data' => $ticketModel));
             } else {
-                //throw new Exception("Insufficient Data provided");
+                throw new Exception("Insufficient Data provided");
             }
         } catch (Mage_Core_Exception $e) {
             Mage::getSingleton('core/session')->addError($e->getMessage());
@@ -85,6 +95,9 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
         $this->_redirect('tickets/support/list');
     }
 
+    /**
+     * Receives the POST when new comment is added
+     */
     public function newCommentAction() {
          try {
             $data = $this->getRequest()->getParams();
@@ -97,7 +110,7 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
                 $successMessage = Mage::helper('inchoo_supportticket')->__('New comment added');
                 Mage::getSingleton('core/session')->addSuccess($successMessage);
             } else {
-                //throw new Exception("Insufficient Data provided");
+                throw new Exception("Insufficient Data provided");
             }
         } catch (Mage_Core_Exception $e) {
             Mage::getSingleton('core/session')->addError($e->getMessage());
@@ -106,6 +119,9 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
         $this->_redirectReferer();
     }
 
+    /**
+     * Checks if user is logged in before every request to this controller
+     */
     public function preDispatch() {
         parent::preDispatch();
         if (!Mage::getSingleton('customer/session')->authenticate($this)) {
