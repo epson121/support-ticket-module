@@ -3,8 +3,15 @@
 <layout>
     <adminhtml_inchoo_supportticket_edit>
         <reference name="content">
-            <block type="inchoo_supportticket/adminhtml_tickets_edit" template="inchoo/supportticket/edit.phtml" name="edit_tickets" />
-         </reference>
+            <block type="inchoo_supportticket/adminhtml_tickets_edit"  name="edit_tickets"></block>
+        </reference>
+
+        <reference name="left">
+            <block type="inchoo_supportticket/adminhtml_tickets_edit_tab" name="tickets_edit_tab">
+                <action method="addTab"><name>tickets_main_section</name><block>inchoo_supportticket/adminhtml_tickets_edit_tab_ticket</block></action>
+            </block>
+        </reference>
+
     </adminhtml_inchoo_supportticket_edit>
 
 </layout>

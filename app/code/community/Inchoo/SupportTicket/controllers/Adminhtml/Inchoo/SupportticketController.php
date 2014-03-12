@@ -21,7 +21,7 @@ class Inchoo_SupportTicket_Adminhtml_Inchoo_SupportticketController extends Mage
             $ticket = Mage::getModel('inchoo_supportticket/ticket');
             if ($ticket->load($ticketId)) {
                 Mage::register('loaded_ticket', $ticket);
-                $this->loadLayout()->_setActiveMenu('customer');
+                $this->loadLayout();
                 $this->renderLayout();
                 return $this;
             }

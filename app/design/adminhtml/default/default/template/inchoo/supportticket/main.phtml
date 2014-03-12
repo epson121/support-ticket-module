@@ -1,0 +1,8 @@
+<?php
+    $ticket = Mage::registry('loaded_ticket');
+    $comments = Mage::helper('inchoo_supportticket')->getTicketComments($ticket->getTicketId());
+    $backUrl = Mage::helper('adminhtml')->getUrl("adminhtml/inchoo_supportticket/index");
+?>
+
+<h1>test</h1>
+<?php echo $ticket->getContent(); ?>
