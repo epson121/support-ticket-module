@@ -38,17 +38,20 @@ class Inchoo_SupportTicket_Block_Adminhtml_Tickets_Grid extends Mage_Adminhtml_B
             'type'=> 'text',
             'width' => '300px',
             'index' => 'subject',
+            'escape' => true
             ));
         $this->addColumn('content', array(
             'header'=> Mage::helper('inchoo_supportticket')->__('Content'),
             'type' => 'text',
             'index' => 'content',
+            'escape' => true
             ));
         $this->addColumn('status', array(
             'header'=> Mage::helper('inchoo_supportticket')->__('Status'),
             'type'=> 'text',
             'width' => '200px',
             'index' => 'status',
+            'escape' => true
             ));
         $this->addColumn('created_at', array(
             'header'=> Mage::helper('inchoo_supportticket')->__('Created at'),
