@@ -45,13 +45,13 @@
                 <?php foreach($_collection as $ticket): ?>
                     <tr>
                         <td>
-                            <?php echo $ticket->getTicketId(); ?>
+                            <?php echo $this->escapeHtml($ticket->getTicketId()); ?>
                         </td>
                         <td>
-                            <?php echo $ticket->getSubject(); ?>
+                            <?php echo $this->escapeHtml($ticket->getSubject()); ?>
                         </td>
                         <td>
-                            <?php if ($ticket->getStatus() == 0): ?>
+                            <?php if ($this->escapeHtml($ticket->getStatus() == 0)): ?>
                                 Closed
                             <?php else: ?>
                                 Open

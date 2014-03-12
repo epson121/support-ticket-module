@@ -45,10 +45,10 @@
                 <?php foreach($_collection as $ticket): ?>
                     <tr>
                         <td>
-                            <?php echo $ticket->getTicketId(); ?>
+                            <?php echo $this->escapeHtml($ticket->getTicketId()); ?>
                         </td>
                         <td>
-                            <?php echo $ticket->getSubject(); ?>
+                            <?php echo $this->escapeHtml($ticket->getSubject()); ?>
                         </td>
                         <td>
                             <?php if ($ticket->getStatus() == 0): ?>
@@ -61,7 +61,7 @@
                             <?php echo date('j. n. Y. H:i', strtotime($ticket->getCreatedAt())); ?>
                         </td>
                         <td>
-                            <a href="<?php echo $this->getUrl('tickets/support/view', array('_query' => array('ticket_id' => $ticket->getTicketId(), 'archive'=> true))) ?>">
+                            <a href="<?php echo $this->getUrl('tickets/support/view', array('_query' => array('ticket_id' => $this->escapeHtml($ticket->getTicketId()), 'archive'=> true))) ?>">
                                 <?php echo $this->__('View') ?>
                             </a>
                         </td>

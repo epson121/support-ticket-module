@@ -26,14 +26,14 @@
         <ol>
             <li class="item">
                     <span style="float:left;font-weight:bold;">
-                        <?php echo $ticket->getSubject(); ?>
+                        <?php echo $this->escapeHtml($ticket->getSubject()); ?>
                     </span>
                     <span style="float:right;">
-                        <?php echo $ticket->getCreatedAt(); ?>
+                        <?php echo $this->escapeHtml($ticket->getCreatedAt()); ?>
                     </span>
                     <br>
                     <hr>
-                    <?php echo $ticket->getContent(); ?>
+                    <?php echo $this->escapeHtml($ticket->getContent()); ?>
             </li>
         </ol>
     </div>
@@ -43,14 +43,14 @@
             <?php foreach($comments as $comment): ?>
                 <li class="item">
                      <span style="float:left;font-weight:bold;">
-                        <?php echo $comment->getAuthor(); ?>
+                        <?php echo $this->escapeHtml($comment->getAuthor()); ?>
                     </span>
                     <span style="float:right;">
-                        <?php echo $comment->getCreatedAt(); ?>
+                        <?php echo $this->escapeHtml($comment->getCreatedAt()); ?>
                     </span>
                     <br>
                     <hr>
-                    <?php echo $comment->getContent(); ?>
+                    <?php echo $this->escapeHtml($comment->getContent()); ?>
                 </li>
             </li>
             <?php endforeach ?>
@@ -63,7 +63,6 @@
                 <div class="fieldset">
                     <?php echo $this->getBlockHtml('formkey')?>
                     <h2 class="legend">Add a comment:</h2>
-                    <?php echo $this->getBlockHtml('formkey')?>
                     <ul class="form-list">
                         <input type="hidden" name="ticket_id" value="<?php echo $ticket->getTicketId(); ?>">
                         <li class="wide">
