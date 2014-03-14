@@ -12,7 +12,7 @@
         <update handle="customer_account"/>
         <reference name="content">
             <block name="tickets.list" type="inchoo_supportticket/list"
-                   template="inchoo/tickets/list.phtml" as="tickets_list"/>
+                    as="tickets_list"/>
         </reference>
     </inchoo_tickets_support_list>
 
@@ -35,8 +35,8 @@
     <inchoo_tickets_support_archive>
         <update handle="customer_account"/>
         <reference name="content">
-            <block name="tickets.archive" type="inchoo_supportticket/list"
-                   template="inchoo/tickets/archive.phtml" as="tickets_archive"/>
+            <block name="tickets.archive" type="inchoo_supportticket/archive"
+                    as="tickets_archive"/>
         </reference>
     </inchoo_tickets_support_archive>
 

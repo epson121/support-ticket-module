@@ -14,7 +14,7 @@ $helper = Mage::helper('inchoo_giftregistry')
         <li>
             <h3><?php echo $registry->getEventName(); ?></h3>
             <p><strong><?php echo $this->__('Event Date:') ?>
-                <?php echo $registry->getEventDate(); ?></strong></p>
+                <?php echo htmlEscape($registry->getEventDate()); ?></strong></p>
                 <p>
                     <strong>
                         <?php echo $this->__('Event Location:')?>

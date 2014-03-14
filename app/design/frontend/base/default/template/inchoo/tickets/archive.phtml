@@ -1,5 +1,5 @@
 <?php
-    $_collection = $this->getArchivedList();
+    $_collection = $this->getTickets();
     $helper = Mage::helper('inchoo_supportticket')
 ?>
 <div class="page-title title-buttons">
@@ -15,59 +15,52 @@
             </span>
         </span>
     </button>
-    <button type="button" title="<?php echo $this->__('Back') ?>"
+    <button type="button" title="<?php echo $this->__('Archive') ?>"
             class="button"
-            onclick="window.location='<?php echo $this->getListTicketsUrl(); ?>';">
+            onclick="window.location='<?php echo $this->getArchiveUrl(); ?>';">
         <span>
             <span>
-                <?php echo $this->__('Back') ?>
+                <?php echo $this->__('Archive') ?>
             </span>
         </span>
     </button>
-</div>
 
-<div class="customer-list">
-    <?php if(!$_collection->count()): ?>
-    <h2><?php echo $this->__('You have no archived tickets.') ?></h2>
-    </a>
-    <?php else: ?>
-        <table class="data-table" id="tickets_table" >
-            <thead>
-                <tr class="first last">
-                    <th>Ticket #</th>
-                    <th>Subject</th>
-                    <th><span class="nobr">Status</span></th>
-                    <th><span class="nobr">Created</span></th>
-                    <th><span class="nobr"></span></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach($_collection as $ticket): ?>
-                    <tr>
-                        <td>
-                            <?php echo $this->escapeHtml($ticket->getTicketId()); ?>
-                        </td>
-                        <td>
-                            <?php echo $this->escapeHtml($ticket->getSubject()); ?>
-                        </td>
-                        <td>
-                            <?php if ($ticket->getStatus() == 0): ?>
+</div>
+<?php echo $this->getPagerHtml(); ?>
+<?php if($_collection->count()): ?>
+<table class="data-table" id="my-tickets-table">
+    <thead>
+        <tr>
+            <th><?php echo $this->__('Ticket #') ?></th>
+            <th><?php echo $this->__('Subject') ?></th>
+            <th><?php echo $this->__('Status') ?></th>
+            <th><?php echo $this->__('') ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php $_odd = ''; ?>
+        <?php foreach($_collection as $ticket): ?>
+        <tr>
+            <td><?php echo $this->escapeHtml($ticket->getTicketId()); ?></td>
+            <td><span class="nobr"><?php echo $this->escapeHtml($ticket->getSubject()); ?></span></td>
+            <td>
+                <?php if ($this->escapeHtml($ticket->getStatus() == 0)): ?>
                                 Closed
                             <?php else: ?>
                                 Open
                             <?php endif ?>
-                        </td>
-                        <td>
-                            <?php echo date('j. n. Y. H:i', strtotime($ticket->getCreatedAt())); ?>
-                        </td>
-                        <td>
-                            <a href="<?php echo $this->getUrl('tickets/support/view', array('_query' => array('ticket_id' => $this->escapeHtml($ticket->getTicketId()), 'archive'=> true))) ?>">
-                                <?php echo $this->__('View') ?>
-                            </a>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    <?php endif; ?>
-</div>
+            </td>
+            <td>
+                <a href="<?php echo $this->getUrl('tickets/support/view', array('_query' => array('ticket_id' => $this->escapeHtml($ticket->getTicketId()), 'archive'=> true))) ?>">
+                <?php echo $this->__('View') ?>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<script type="text/javascript">decorateTable('my-orders-table');</script>
+<?php echo $this->getPagerHtml(); ?>
+<?php else: ?>
+    <p><?php echo $this->__('You have placed no orders.'); ?></p>
+<?php endif ?>
+

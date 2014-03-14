@@ -1,17 +1,17 @@
 <?php
 
-class Inchoo_SupportTicket_Block_List extends Mage_Core_Block_Template
+class Inchoo_SupportTicket_Block_Archive extends Mage_Core_Block_Template
 {
 
     public function __construct()
     {
         parent::__construct();
-        $this->setTemplate('inchoo/tickets/list.phtml');
+        $this->setTemplate('inchoo/tickets/archive.phtml');
         $currentCustomer = Mage::getSingleton('customer/session')->getCustomer();
         $website_id = Mage::app()->getWebsite()->getId();
         if ($currentCustomer) {
             $ticketList = Mage::getResourceModel('inchoo_supportticket/ticket_collection')
-                                ->addFieldToFilter('status', 1)
+                                ->addFieldToFilter('status', 0)
                                 ->addFieldToFilter('customer_id', $currentCustomer->getId())
                                 ->addFieldToFilter('website_id', $website_id);
         }
