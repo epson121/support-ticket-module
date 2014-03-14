@@ -1,13 +1,14 @@
 <?php
 
 class Inchoo_SupportTicket_Block_Adminhtml_Tickets_Edit_Tab_Ticket
-    extends Mage_Adminhtml_Block_Template
+    extends Mage_Adminhtml_Block_Widget
         implements Mage_Adminhtml_Block_Widget_Tab_Interface
 {
-   protected function _construct()
+
+    protected function _construct()
     {
         parent::_construct();
-        $this->setTemplate('inchoo/supportticket/main.phtml');
+        $this->setTemplate('inchoo/supportticket/ticket_main.phtml');
     }
 
     /**

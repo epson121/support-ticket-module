@@ -77,7 +77,7 @@ class Inchoo_SupportTicket_Adminhtml_Inchoo_SupportticketController extends Mage
             $ticketCommentModel = Mage::getModel('inchoo_supportticket/ticket_comment');
             $customer = Mage::getSingleton('admin/session')->getUser();
 
-            if($this->getRequest()->getPost() && !empty($data)) {
+            if($this->getRequest()->getPost() && !empty($data) && $data['ticket_comment_content'] != '') {
                 $ticketCommentModel->updateTicketCommentData($customer, $data);
                 $ticketCommentModel->save();
                 $successMessage = Mage::helper('inchoo_supportticket')->__('New comment added');

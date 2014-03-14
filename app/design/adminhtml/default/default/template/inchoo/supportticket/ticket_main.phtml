@@ -1,0 +1,27 @@
+<div class="box-left">
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4><?php echo Mage::helper('sales')->__('Comments History') ?></h4>
+        </div>
+        <fieldset>
+            <?php echo $this->getChildHtml('tickets_main_section_ticketinfo') ?>
+        </fieldset>
+    </div>
+</div>
+<div class="box-right">
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4><?php echo Mage::helper('sales')->__('Comments History') ?></h4>
+        </div>
+        <fieldset>
+            <?php echo $this->getChildHtml('tickets_main_section_ticketcomments') ?>
+        </fieldset>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var dataForm = new varienForm('form-validate', true);
+//]]>
+</script>
+
