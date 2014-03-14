@@ -51,7 +51,7 @@
                             <?php endif ?>
             </td>
             <td>
-                <a href="<?php echo $this->getUrl('tickets/support/view', array('_query' => array('ticket_id' => $this->escapeHtml($ticket->getTicketId()), 'archive'=> true))) ?>">
+                <a href="<?php echo $this->getUrl('tickets/support/view', array('ticket_id' => $this->escapeHtml($ticket->getTicketId()), 'archive'=> true)) ?>">
                 <?php echo $this->__('View') ?>
             </td>
         </tr>
