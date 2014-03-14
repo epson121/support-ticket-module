@@ -16,6 +16,12 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
      */
     public function listAction() {
         $this->loadLayout();
+        // header('Content-Type: text/xml');
+        // echo $config = Mage::getConfig()
+        //     ->loadModulesConfiguration('system.xml')
+        //     ->getNode()
+        //     ->asXML();
+        // die();
         $this->renderLayout();
         return $this;
     }
