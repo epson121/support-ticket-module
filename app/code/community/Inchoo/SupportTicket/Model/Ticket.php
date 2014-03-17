@@ -13,6 +13,7 @@ class Inchoo_SupportTicket_Model_Ticket extends Mage_Core_Model_Abstract
      */
     public function updateTicketData(Mage_Customer_Model_Customer $customer, $data) {
         try{
+            echo $customer->getId();
             if(!empty($data)) {
                 $this->setCustomerId($customer->getId());
                 $this->setSubject($data['ticket_subject']);

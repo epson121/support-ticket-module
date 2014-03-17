@@ -16,13 +16,13 @@ class Inchoo_SupportTicket_Block_Adminhtml_Tickets_Edit_Tab_Testgrid
      * Get all tickets for display in admin grid.
      * @return
      */
-    protected function _prepareCollection() {
+    protected function _prepareCollection()
+    {
         $website_id = Mage::app()->getWebsite()->getId();
         $collection = Mage::getModel('inchoo_supportticket/ticket')
                             ->getCollection();
         $this->setCollection($collection);
-        parent::_prepareCollection();
-        return $this;
+        return parent::_prepareCollection();
     }
 
     /**
@@ -74,7 +74,7 @@ class Inchoo_SupportTicket_Block_Adminhtml_Tickets_Edit_Tab_Testgrid
 
     public function getGridUrl()
     {
-        return $this->getUrl('*/*/edit', array('_current' => true));
+        return $this->getUrl('*/*/test', array('_current' => true));
     }
 
 

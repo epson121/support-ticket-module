@@ -36,16 +36,6 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
     // }
 
     /**
-     * Create new ticket
-     */
-    public function newAction() {
-        $this->loadLayout();
-        $this->renderLayout();
-        // Zend_Debug::dump($this->getLayout()->getUpdate()->getHandles());
-        return $this;
-    }
-
-    /**
      * View individual ticket
      */
     public function viewAction() {
@@ -75,6 +65,17 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
     }
 
     /**
+     * Generate invoices grid for ajax request
+     */
+    public function testAction()
+    {
+        $this->_initOrder();
+        $this->getResponse()->setBody(
+            $this->getLayout()->createBlock('inchoo_supportticket/adminhtml_tickets_edit_tab_testgrid')->toHtml()
+        );
+    }
+
+    /**
      * Receives the POST from newAction and saves the ticket
      * Dispatches the event for sending email notification
      */
@@ -99,7 +100,7 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
             Mage::getSingleton('core/session')->addError($e->getMessage());
             $this->_redirect('*/*/');
         }
-        $this->_redirect('tickets/support/list');
+            $this->_redirect('tickets/support/list');
     }
 
     /**

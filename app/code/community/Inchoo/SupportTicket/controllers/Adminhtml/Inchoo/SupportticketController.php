@@ -15,7 +15,8 @@ class Inchoo_SupportTicket_Adminhtml_Inchoo_SupportticketController extends Mage
      * Show individual ticket with its comments
      * @return [type] [description]
      */
-    public function editAction() {
+    public function editAction()
+    {
         $ticketId = $this->getRequest()->getParam('ticket_id');
         if ($ticketId) {
             $ticket = Mage::getModel('inchoo_supportticket/ticket');
@@ -31,9 +32,23 @@ class Inchoo_SupportTicket_Adminhtml_Inchoo_SupportticketController extends Mage
     }
 
     /**
+     * Generate test grid for ajax request
+     */
+    public function testAction()
+    {
+        // var_dump($this->getLayout()->createBlock('inchoo_supportticket/adminhtml_tickets_edit_tab_testgrid')->toHtml());
+        var_dump($this->getResponse);
+        $this->getResponse()->setBody(
+            $this->getLayout()->createBlock('inchoo_supportticket/adminhtml_tickets_edit_tab_testgrid')->toHtml()
+        );
+        $this->renderLayout();
+    }
+
+    /**
      * called on button click in editAction, deletes the ticket
      */
-    public function deleteAction() {
+    public function deleteAction()
+    {
         $ticketId = $this->getRequest()->getParam('ticket_id');
         if ($ticketId) {
             $ticket = Mage::getModel('inchoo_supportticket/ticket');
@@ -49,7 +64,8 @@ class Inchoo_SupportTicket_Adminhtml_Inchoo_SupportticketController extends Mage
     /**
      * Change status of the ticket (closes the ticket)
      */
-    public function updateStatusAction() {
+    public function updateStatusAction()
+    {
          try {
             $ticketId = $this->getRequest()->getParam('ticket_id');
             if($this->getRequest()->getPost() && !empty($ticketId)) {
@@ -84,6 +100,28 @@ class Inchoo_SupportTicket_Adminhtml_Inchoo_SupportticketController extends Mage
                 Mage::getSingleton('core/session')->addSuccess($successMessage);
             } else{
                 //throw new Exception("Insufficient Data provided");
+            }
+        } catch (Mage_Core_Exception $e) {
+            Mage::getSingleton('core/session')->addError($e->getMessage());
+            $this->_redirect('*/*/');
+        }
+        $this->_redirectReferer();
+    }
+
+    public function newticketAction() {
+        try {
+            $data = $this->getRequest()->getParams();
+            $ticketModel = Mage::getModel('inchoo_supportticket/ticket');
+            $customer = Mage::getSingleton('admin/session')->getUser();
+            if($this->getRequest()->getPost() && !empty($data)) {
+                $ticketModel->updateTicketData($customer, $data);
+                $ticketModel->save();
+                $successMessage = Mage::helper('inchoo_supportticket')->__('New ticket created');
+                Mage::getSingleton('core/session')->addSuccess($successMessage);
+                // used for sending the email
+                Mage::dispatchEvent('ticket_added_event_handle', array('customer' => $customer, 'data' => $ticketModel));
+            } else {
+                throw new Exception("Insufficient Data provided");
             }
         } catch (Mage_Core_Exception $e) {
             Mage::getSingleton('core/session')->addError($e->getMessage());

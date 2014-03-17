@@ -12,8 +12,18 @@
                     <block type="inchoo_supportticket/adminhtml_tickets_edit_tab_ticket_ticketinfo" name="tickets_main_section_ticketinfo" ></block>
                     <block type="inchoo_supportticket/adminhtml_tickets_edit_tab_ticket_ticketcomments" name="tickets_main_section_ticketcomments" ></block>
                 </block>
-                <action method="addTab"><name>tickets_main_section</name><block>tickets_main_section</block></action>
-                <action method="addTab"><name>tickets_main_test_grid</name><block>inchoo_supportticket/adminhtml_tickets_edit_tab_testgrid</block></action>
+                <action method="addTab">
+                    <name>tickets_main_section</name>
+                    <block>tickets_main_section</block>
+                </action>
+                <action method="addTab">
+                    <name>tickets_main_test_grid</name>
+                    <block>inchoo_supportticket/adminhtml_tickets_edit_tab_testgrid</block>
+                </action>
+                <action method="addTab">
+                    <name>tickets_main_test_form</name>
+                    <block>inchoo_supportticket/adminhtml_tickets_edit_tab_testform</block>
+                </action>
             </block>
         </reference>
 
