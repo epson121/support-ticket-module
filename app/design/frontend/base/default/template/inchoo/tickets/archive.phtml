@@ -45,10 +45,10 @@
             <td><span class="nobr"><?php echo $this->escapeHtml($ticket->getSubject()); ?></span></td>
             <td>
                 <?php if ($this->escapeHtml($ticket->getStatus() == 0)): ?>
-                                Closed
-                            <?php else: ?>
-                                Open
-                            <?php endif ?>
+                    Closed
+                <?php else: ?>
+                    Open
+                <?php endif ?>
             </td>
             <td>
                 <a href="<?php echo $this->getUrl('tickets/support/view', array('ticket_id' => $this->escapeHtml($ticket->getTicketId()), 'archive'=> true)) ?>">

@@ -26,40 +26,40 @@
     </button>
 
 </div>
-<?php echo $this->getPagerHtml(); ?>
 <?php if($_collection->count()): ?>
-<table class="data-table" id="my-tickets-table">
-    <thead>
-        <tr>
-            <th><?php echo $this->__('Ticket #') ?></th>
-            <th><?php echo $this->__('Subject') ?></th>
-            <th><?php echo $this->__('Status') ?></th>
-            <th><?php echo $this->__('') ?></th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php $_odd = ''; ?>
-        <?php foreach($_collection as $ticket): ?>
-        <tr>
-            <td><?php echo $this->escapeHtml($ticket->getTicketId()); ?></td>
-            <td><span class="nobr"><?php echo $this->escapeHtml($ticket->getSubject()); ?></span></td>
-            <td>
-                <?php if ($this->escapeHtml($ticket->getStatus() == 0)): ?>
-                                Closed
-                            <?php else: ?>
-                                Open
-                            <?php endif ?>
-            </td>
-            <td>
-                <a href="<?php echo $this->getUrl('tickets/support/view', array('ticket_id' => $ticket->getTicketId())) ?>">
-                                <?php echo $this->__('View') ?></a>
-            </td>
-        </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
-<script type="text/javascript">decorateTable('my-orders-table');</script>
-<?php echo $this->getPagerHtml(); ?>
+    <?php echo $this->getPagerHtml(); ?>
+    <table class="data-table" id="my-tickets-table">
+        <thead>
+            <tr>
+                <th><?php echo $this->__('Ticket #') ?></th>
+                <th><?php echo $this->__('Subject') ?></th>
+                <th><?php echo $this->__('Status') ?></th>
+                <th><?php echo $this->__('') ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $_odd = ''; ?>
+            <?php foreach($_collection as $ticket): ?>
+            <tr>
+                <td><?php echo $this->escapeHtml($ticket->getTicketId()); ?></td>
+                <td><span class="nobr"><?php echo $this->escapeHtml($ticket->getSubject()); ?></span></td>
+                <td>
+                    <?php if ($this->escapeHtml($ticket->getStatus() == 0)): ?>
+                        Closed
+                    <?php else: ?>
+                        Open
+                    <?php endif ?>
+                </td>
+                <td>
+                    <a href="<?php echo $this->getUrl('tickets/support/view', array('ticket_id' => $ticket->getTicketId())) ?>">
+                                    <?php echo $this->__('View') ?></a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <script type="text/javascript">decorateTable('my-tickets-table');</script>
+    <?php echo $this->getPagerHtml(); ?>
 <?php else: ?>
     <p><?php echo $this->__('You have placed no orders.'); ?></p>
 <?php endif ?>

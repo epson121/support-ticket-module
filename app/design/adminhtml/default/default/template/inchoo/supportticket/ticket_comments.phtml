@@ -27,21 +27,23 @@
     <?php if($ticket->getStatus() == 1): ?>
         <form action="<?php echo $this->getUrl('adminhtml/inchoo_supportticket/newComment')?>" method="post" id="myform">
             <fieldset>
-                <?php echo $this->getBlockHtml('formkey')?>
-                <input type="hidden" name="ticket_id" value="<?php echo $ticket->getTicketId(); ?>">
-                <ul class="form-list">
-                    <li>
-                        <label for="ticket_comment_content"><?php echo $this->__('Comment') ?></label>
-                        <br>
-                        <textarea class="required-entry" name="ticket_comment_content" rows="4" cols="50"></textarea>
-                    </li>
-                </ul>
-                <div class="buttons-set">
-                    <button type="submit" title="Add comment" class="button">
-                        <span>
-                            <span><?php echo $this->__('Add comment') ?></span>
-                        </span>
-                    </button>
+                <div class="fieldset">
+                    <?php echo $this->getBlockHtml('formkey')?>
+                    <input type="hidden" name="ticket_id" value="<?php echo $ticket->getTicketId(); ?>">
+                    <ul class="form-list">
+                        <li>
+                            <label for="ticket_comment_content"><?php echo $this->__('Comment') ?></label>
+                            <br>
+                            <textarea class="required-entry" name="ticket_comment_content" rows="4" cols="50"></textarea>
+                        </li>
+                    </ul>
+                    <div class="buttons-set">
+                        <button type="submit" title="Add comment" class="button">
+                            <span>
+                                <span><?php echo $this->__('Add comment') ?></span>
+                            </span>
+                        </button>
+                    </div>
                 </div>
             </fieldset>
         </form>
@@ -75,3 +77,8 @@
 <?php else: ?>
     <h3>This ticket does not exist.</h3>
 <?php endif; ?>
+<script type="text/javascript">
+//<![CDATA[
+var dataForm = new varienForm('myform', true);
+//]]>
+</script>
