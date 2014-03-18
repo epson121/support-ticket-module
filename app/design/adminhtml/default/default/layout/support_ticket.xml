@@ -3,7 +3,7 @@
 <layout>
     <adminhtml_inchoo_supportticket_edit>
         <reference name="content">
-            <block type="inchoo_supportticket/adminhtml_tickets_edit"  name="edit_tickets"></block>
+            <block output="toHtml" type="inchoo_supportticket/adminhtml_tickets_edit"  name="edit_tickets"></block>
         </reference>
 
         <reference name="left">
@@ -26,7 +26,6 @@
                 </action>
             </block>
         </reference>
-
     </adminhtml_inchoo_supportticket_edit>
 
 </layout>

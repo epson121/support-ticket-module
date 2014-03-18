@@ -10,6 +10,13 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
         return $this;
     }
 
+    public function newAction()
+    {
+        $this->loadLayout();
+        $this->renderLayout();
+        return $this;
+    }
+
     /**
      * View opened tickets
      * @return [type] [description]

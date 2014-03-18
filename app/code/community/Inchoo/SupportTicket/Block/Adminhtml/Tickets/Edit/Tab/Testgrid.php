@@ -8,7 +8,8 @@ class Inchoo_SupportTicket_Block_Adminhtml_Tickets_Edit_Tab_Testgrid
     public function __construct()
     {
         parent::__construct();
-        $this->setId('test_grid');
+        $this->setId('inchoo_supportticket');
+        $this->setDefaultSort('ticket_id');
         $this->setUseAjax(true);
     }
 
@@ -16,13 +17,13 @@ class Inchoo_SupportTicket_Block_Adminhtml_Tickets_Edit_Tab_Testgrid
      * Get all tickets for display in admin grid.
      * @return
      */
-    protected function _prepareCollection()
-    {
+    protected function _prepareCollection() {
         $website_id = Mage::app()->getWebsite()->getId();
         $collection = Mage::getModel('inchoo_supportticket/ticket')
                             ->getCollection();
         $this->setCollection($collection);
-        return parent::_prepareCollection();
+        parent::_prepareCollection();
+        return $this;
     }
 
     /**
@@ -74,7 +75,7 @@ class Inchoo_SupportTicket_Block_Adminhtml_Tickets_Edit_Tab_Testgrid
 
     public function getGridUrl()
     {
-        return $this->getUrl('*/*/test', array('_current' => true));
+        return $this->getUrl('*/*/grid', array('_current' => true));
     }
 
 
@@ -117,4 +118,5 @@ class Inchoo_SupportTicket_Block_Adminhtml_Tickets_Edit_Tab_Testgrid
     {
         return false;
     }
+
 }

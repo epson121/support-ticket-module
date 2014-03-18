@@ -34,14 +34,18 @@ class Inchoo_SupportTicket_Adminhtml_Inchoo_SupportticketController extends Mage
     /**
      * Generate test grid for ajax request
      */
-    public function testAction()
+    public function gridAction()
     {
         // var_dump($this->getLayout()->createBlock('inchoo_supportticket/adminhtml_tickets_edit_tab_testgrid')->toHtml());
-        var_dump($this->getResponse);
+        // var_dump($this->getResponse);
+        // $this->getResponse()->setBody(
+        //     $this->getLayout()->createBlock('inchoo_supportticket/adminhtml_tickets_edit_tab_testgrid')->toHtml()
+        // );
+        // $this->renderLayout();
+        // var_dump($this->getLayout()->createBlock('inchoo_supportticket/adminhtml_tickets_edit_tab_testgrid')->toHtml());
         $this->getResponse()->setBody(
-            $this->getLayout()->createBlock('inchoo_supportticket/adminhtml_tickets_edit_tab_testgrid')->toHtml()
-        );
-        $this->renderLayout();
+           $this->getLayout()->createBlock('inchoo_supportticket/adminhtml_tickets_edit_tab_testgrid')->toHtml()
+           );
     }
 
     /**
