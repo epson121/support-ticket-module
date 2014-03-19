@@ -4,7 +4,21 @@
             <h4><?php echo Mage::helper('sales')->__('Comments History') ?></h4>
         </div>
         <fieldset>
-            <?php echo $this->getChildHtml('tickets_main_section_ticketinfo') ?>
+            <?php
+                $ticket = Mage::registry('loaded_ticket');
+            ?>
+            <div class="hor-scroll">
+                <table cellspacing="0" class="form-list" style="table-layout: fixed;">
+                    <tr>
+                        <td class="label"><label><?php echo Mage::helper('inchoo_supportticket')->__('Ticket subject') ?></label></td>
+                        <td class="value"><strong><?php echo $this->escapeHtml($ticket->getSubject()); ?></strong></td>
+                    </tr>
+                     <tr>
+                        <td class="label"><label><?php echo Mage::helper('inchoo_supportticket')->__('Ticket content') ?></label></td>
+                        <td style="word-wrap:break-word" class="value"><strong><?php echo $this->escapeHtml($ticket->getContent()); ?></strong></td>
+                    </tr>
+                </table>
+            </div>
         </fieldset>
     </div>
 </div>
@@ -13,9 +27,8 @@
         <div class="entry-edit-head">
             <h4><?php echo Mage::helper('sales')->__('Comments History') ?></h4>
         </div>
-        <fieldset>
-            <?php echo $this->getChildHtml('tickets_main_section_ticketcomments') ?>
-        </fieldset>
+        <?php echo $this->getLayout()->createBlock('inchoo_supportticket/adminhtml_tickets_edit_tab_ticket_ticketcomments')->toHtml(); ?>
     </div>
 </div>
+
 

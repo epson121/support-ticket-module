@@ -2,83 +2,86 @@
     $ticket = Mage::registry('loaded_ticket');
     $comments = Mage::helper('inchoo_supportticket')->getTicketComments($ticket->getTicketId());
 ?>
-<?php if($ticket->getData('ticket_id')): ?>
-     <?php if(count($comments) > 0): ?>
-                    <h3>Comments:</h3>
-                    <ul class="note-list">
-                        <?php foreach($comments as $comment): ?>
-                            <li>
-                                <strong><?php echo $comment->getCreatedAt(); ?></strong>
-                                <span class="separator"></span><br/>
-                                <small>
-                                    <?php echo $this->helper('sales')->__('Author') ?>
-                                    <strong class="subdue">
-                                        <?php echo $this->escapeHtml($comment->getAuthor()); ?>
-                                    </strong>
-                                </small>
-                                <br/>
-                                <?php echo $this->escapeHtml($comment->getContent(), array('b','br','strong','i','u')) ?>
-                            </li>
-                        <?php endforeach; ?>
-                        </ul>
-    <?php else: ?>
-            No comments for this ticket!
-    <?php endif; ?>
-    <?php if($ticket->getStatus() == 1): ?>
-        <form action="<?php echo $this->getUrl('adminhtml/inchoo_supportticket/newComment')?>" method="post" id="myform">
-            <fieldset>
-                <div class="fieldset">
-                    <?php echo $this->getBlockHtml('formkey')?>
-                    <input type="hidden" name="ticket_id" value="<?php echo $ticket->getTicketId(); ?>">
-                    <ul class="form-list">
-                        <li>
-                            <label for="ticket_comment_content"><?php echo $this->__('Comment') ?></label>
-                            <br>
-                            <textarea class="required-entry" name="ticket_comment_content" rows="4" cols="50"></textarea>
-                        </li>
-                    </ul>
-                    <div class="buttons-set">
-                        <button type="submit" title="Add comment" class="button">
-                            <span>
-                                <span><?php echo $this->__('Add comment') ?></span>
-                            </span>
-                        </button>
-                    </div>
-                </div>
-            </fieldset>
-        </form>
-        <form action="<?php echo $this->getUrl('adminhtml/inchoo_supportticket/updateStatus/')?>" method="post" id="form-validate">
-                <fieldset>
-                <?php echo $this->getBlockHtml('formkey')?>
-                <input type="hidden" name="ticket_id" value="<?php echo $ticket->getTicketId(); ?>">
-                <div class="buttons-set" style="float:right;">
-                    <button type="submit" title="Close this Support Ticket" class="button scalable save">
-                        <span>
-                            <span><?php echo $this->__('Close this Support Ticket') ?></span>
-                        </span>
-                    </button>
-                </div>
-        </form>
-    <?php else: ?>
-        <h3>This ticket is closed.</h3>
-    <?php endif; ?>
-    <form action="<?php echo $this->getUrl('adminhtml/inchoo_supportticket/delete/')?>" method="post" id="form-validate">
+
+<fieldset>
+            <?php if($ticket->getData('ticket_id')): ?>
+<?php if(count($comments) > 0): ?>
+            <h3>Comments:</h3>
+            <ul class="note-list">
+                <?php foreach($comments as $comment): ?>
+                    <li>
+                        <strong><?php echo $comment->getCreatedAt(); ?></strong>
+                        <span class="separator"></span><br/>
+                        <small>
+                            <?php echo $this->helper('sales')->__('Author') ?>
+                            <strong class="subdue">
+                                <?php echo $this->escapeHtml($comment->getAuthor()); ?>
+                            </strong>
+                        </small>
+                        <br/>
+                        <?php echo $this->escapeHtml($comment->getContent(), array('b','br','strong','i','u')) ?>
+                    </li>
+                <?php endforeach; ?>
+                </ul>
+<?php else: ?>
+    No comments for this ticket!
+<?php endif; ?>
+<?php if($ticket->getStatus() == 1): ?>
+<form action="<?php echo $this->getUrl('adminhtml/inchoo_supportticket/newComment')?>" method="post" id="myform">
+    <fieldset>
+        <div class="fieldset">
             <?php echo $this->getBlockHtml('formkey')?>
             <input type="hidden" name="ticket_id" value="<?php echo $ticket->getTicketId(); ?>">
-            <div class="buttons-set" style="float:right;">
-                <button type="submit" title="Delete ticket" class="button scalable save">
+            <ul class="form-list">
+                <li>
+                    <label for="ticket_comment_content"><?php echo $this->__('Comment') ?></label>
+                    <br>
+                    <textarea class="required-entry" name="ticket_comment_content" rows="4" cols="50"></textarea>
+                </li>
+            </ul>
+            <div class="buttons-set">
+                <button type="submit" title="Add comment" class="button">
                     <span>
-                        <span><?php echo $this->__('Delete ticket') ?></span>
+                        <span><?php echo $this->__('Add comment') ?></span>
                     </span>
                 </button>
             </div>
-            </fieldset>
-    </form>
+        </div>
+    </fieldset>
+</form>
+<form action="<?php echo $this->getUrl('adminhtml/inchoo_supportticket/updateStatus/')?>" method="post" id="form-validate">
+        <fieldset>
+        <?php echo $this->getBlockHtml('formkey')?>
+        <input type="hidden" name="ticket_id" value="<?php echo $ticket->getTicketId(); ?>">
+        <div class="buttons-set" style="float:right;">
+            <button type="submit" title="Close this Support Ticket" class="button scalable save">
+                <span>
+                    <span><?php echo $this->__('Close this Support Ticket') ?></span>
+                </span>
+            </button>
+        </div>
+</form>
 <?php else: ?>
-    <h3>This ticket does not exist.</h3>
+<h3>This ticket is closed.</h3>
+<?php endif; ?>
+<form action="<?php echo $this->getUrl('adminhtml/inchoo_supportticket/delete/')?>" method="post" id="form-validate">
+    <?php echo $this->getBlockHtml('formkey')?>
+    <input type="hidden" name="ticket_id" value="<?php echo $ticket->getTicketId(); ?>">
+    <div class="buttons-set" style="float:right;">
+        <button type="submit" title="Delete ticket" class="button scalable save">
+            <span>
+                <span><?php echo $this->__('Delete ticket') ?></span>
+            </span>
+        </button>
+    </div>
+    </fieldset>
+</form>
+<?php else: ?>
+<h3>This ticket does not exist.</h3>
 <?php endif; ?>
 <script type="text/javascript">
 //<![CDATA[
 var dataForm = new varienForm('myform', true);
 //]]>
 </script>
+        </fieldset>

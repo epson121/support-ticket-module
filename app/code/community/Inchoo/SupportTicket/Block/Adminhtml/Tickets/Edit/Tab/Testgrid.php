@@ -21,6 +21,12 @@ class Inchoo_SupportTicket_Block_Adminhtml_Tickets_Edit_Tab_Testgrid
         $website_id = Mage::app()->getWebsite()->getId();
         $collection = Mage::getModel('inchoo_supportticket/ticket')
                             ->getCollection();
+        // $collection = Mage::getResourceModel('inchoo_supportticket/ticket')
+        //     ->addFieldToSelect('ticket_id')
+        //     ->addFieldToSelect('created_at')
+        //     ->addFieldToSelect('subject')
+        //     ->addFieldToSelect('content')
+        //     ->addFieldToSelect('status')
         $this->setCollection($collection);
         parent::_prepareCollection();
         return $this;
