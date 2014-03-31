@@ -3,6 +3,7 @@
 class Inchoo_SupportTicket_Helper_Data extends Mage_Core_Helper_Abstract
 {
 
+    protected $STATUS_OPEN = 0;
     /**
      * get all comments of a ticket
      */
@@ -14,5 +15,17 @@ class Inchoo_SupportTicket_Helper_Data extends Mage_Core_Helper_Abstract
                                 ->addFieldToFilter('ticket_id', $id);
         }
         return $comments;
+    }
+
+    public function getOpenTicketsCount($customerId, $websiteId)
+    {
+        $ticketCount = Mage::getModel('inchoo_supportticket/ticket')
+                        ->getCollection()
+                        ->addFieldToFilter('customer_id', $customerId)
+                        ->addFieldToFilter('website_id', $websiteId)
+                        ->addFieldToFilter('status', $STATUS_OPEN)
+                        ->getSize();
+
+        return $ticketCount;
     }
 }
