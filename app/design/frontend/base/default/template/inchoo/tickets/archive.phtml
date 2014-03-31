@@ -15,12 +15,12 @@
             </span>
         </span>
     </button>
-    <button type="button" title="<?php echo $this->__('Archive') ?>"
+    <button type="button" title="<?php echo $this->__('All tickets') ?>"
             class="button"
-            onclick="window.location='<?php echo $this->getArchiveUrl(); ?>';">
+            onclick="window.location='<?php echo $this->getListTicketsUrl(); ?>';">
         <span>
             <span>
-                <?php echo $this->__('Archive') ?>
+                <?php echo $this->__('All tickets') ?>
             </span>
         </span>
     </button>
@@ -61,6 +61,6 @@
 <script type="text/javascript">decorateTable('my-orders-table');</script>
 <?php echo $this->getPagerHtml(); ?>
 <?php else: ?>
-    <p><?php echo $this->__('You have placed no orders.'); ?></p>
+    <p><?php echo $this->__('No archived tickets.'); ?></p>
 <?php endif ?>
 

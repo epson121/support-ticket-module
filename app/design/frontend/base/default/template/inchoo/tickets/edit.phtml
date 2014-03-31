@@ -1,10 +1,9 @@
 <?php
-    $ticket = Mage::registry('loaded_ticket');
-    $isArchive = Mage::registry('archive');
+    $ticket = $this->
 ?>
 <div class="page-title title-buttons">
     <h1>
-        <?php echo $this->__('New Ticket') ?>
+        <?php echo $this->__('Edit Ticket') ?>
     </h1>
     <button type="button" title="<?php echo $this->__('Back to ticket list') ?>"
             class="button" onclick="window.location='<?php echo $this->getListTicketsUrl(); ?>';">
@@ -21,24 +20,23 @@
             <h2 class="legend">Ticket information</h2>
             <?php $this->escapeHtml($this->getBlockHtml('formkey')) ?>
             <ul class="form-list">
-                <input type="hidden" name="ticket_id" value="<?php echo $ticket == null ? '' :$ticket->getTicketId(); ?>">
                 <li class="wide">
                     <label for="ticket_subject">Subject</label>
                     <div class="input-box">
-                        <input type="text" name="ticket_subject" id="ticket_subject" class="required-entry input-text" value="<?php echo $ticket == null ? '' : $ticket->getSubject(); ?>" title="Ticket subject"/>
+                        <input type="text" name="ticket_subject" id="ticket_subject" class="required-entry input-text" value="" title="Ticket subject"/>
                     </div>
                 </li>
                 <li class="wide">
                     <label for="ticket_content"><?php echo $this->__('Content') ?></label>
                     <div class="input-box">
-                        <textarea class="required-entry" name="ticket_content" rows="4" cols="100"><?php echo $ticket == null ? '' : $ticket->getContent(); ?></textarea>
+                        <textarea class="required-entry" name="ticket_content" rows="4" cols="100"></textarea>
                     </div>
                 </li>
             </ul>
             <div class="buttons-set">
                 <button type="submit" title="Add ticket" class="button">
                     <span>
-                        <span><?php echo $ticket == null ? $this->__('New ticket') : $this->__('Update ticket') ?></span>
+                        <span><?php echo $this->__('Add ticket') ?></span>
                     </span>
                 </button>
             </div>

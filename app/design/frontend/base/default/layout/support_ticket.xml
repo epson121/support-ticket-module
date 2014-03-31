@@ -24,6 +24,14 @@
         </reference>
     </inchoo_tickets_support_new>
 
+   <!--  <inchoo_tickets_support_edit>
+        <update handle="customer_account"/>
+        <reference name="content">
+            <block name="tickets.edit" type="inchoo_supportticket/list"
+                   template="inchoo/tickets/edit.phtml" as="tickets_edit"/>
+        </reference>
+    </inchoo_tickets_support_edit> -->
+
     <inchoo_tickets_support_view>
         <update handle="customer_account"/>
         <reference name="content">

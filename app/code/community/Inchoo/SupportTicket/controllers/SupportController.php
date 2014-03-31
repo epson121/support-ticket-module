@@ -12,6 +12,13 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
 
     public function newAction()
     {
+        $ticketId = $this->getRequest()->getParam('ticket_id');
+        if ($ticketId) {
+            $ticket = Mage::getModel('inchoo_supportticket/ticket');
+            if ($ticket->load($ticketId)) {
+                Mage::register('loaded_ticket', $ticket);
+            }
+        }
         $this->loadLayout();
         $this->renderLayout();
         return $this;
@@ -23,24 +30,9 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
      */
     public function listAction() {
         $this->loadLayout();
-        // header('Content-Type: text/xml');
-        // echo $config = Mage::getConfig()
-        //     ->loadModulesConfiguration('system.xml')
-        //     ->getNode()
-        //     ->asXML();
-        // die();
         $this->renderLayout();
         return $this;
     }
-
-    // public function testAction() {
-    //     header('Content-Type: text/xml');
-    //     echo $config = Mage::getConfig()
-    //     ->loadModulesConfiguration('system.xml')
-    //     ->getNode()
-    //     ->asXML();
-    //     exit;
-    // }
 
     /**
      * View individual ticket
@@ -89,7 +81,12 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
     public function newticketAction() {
         try {
             $data = $this->getRequest()->getParams();
-            $ticketModel = Mage::getModel('inchoo_supportticket/ticket');
+            if ($data['ticket_id'] != '') {
+                $ticketModel = Mage::getModel('inchoo_supportticket/ticket');
+                $ticketModel->load($data['ticket_id']);
+            } else {
+                $ticketModel = Mage::getModel('inchoo_supportticket/ticket');
+            }
             $customer = Mage::getSingleton('customer/session')->getCustomer();
 
             if($this->getRequest()->getPost() && !empty($data)) {
@@ -132,6 +129,20 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
             $this->_redirect('*/*/');
         }
         $this->_redirectReferer();
+    }
+
+    public function deleteAction()
+    {
+        $ticketId = $this->getRequest()->getParam('ticket_id');
+        if ($ticketId) {
+            $ticket = Mage::getModel('inchoo_supportticket/ticket');
+            if ($ticket->load($ticketId)) {
+                $ticket->deleteTicket($ticketId);
+                $this->_redirect('tickets/support/list');
+                return $this;
+            }
+        }
+        $this->_redirect('noroute');
     }
 
     /**

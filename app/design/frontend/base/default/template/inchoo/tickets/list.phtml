@@ -31,10 +31,12 @@
     <table class="data-table" id="my-tickets-table">
         <thead>
             <tr>
-                <th><?php echo $this->__('Ticket #') ?></th>
+                <th style="width:10%;"><?php echo $this->__('Ticket #') ?></th>
                 <th><?php echo $this->__('Subject') ?></th>
                 <th><?php echo $this->__('Status') ?></th>
-                <th><?php echo $this->__('') ?></th>
+                <th style="width:10%;"><?php echo $this->__('') ?></th>
+                <th style="width:10%;"><?php echo $this->__('') ?></th>
+                <th style="width:10%;"><?php echo $this->__('') ?></th>
             </tr>
         </thead>
         <tbody>
@@ -53,6 +55,14 @@
                 <td>
                     <a href="<?php echo $this->getUrl('tickets/support/view', array('ticket_id' => $ticket->getTicketId())) ?>">
                                     <?php echo $this->__('View') ?></a>
+                </td>
+                <td>
+                    <a href="<?php echo $this->getUrl('tickets/support/new', array('ticket_id' => $ticket->getTicketId())) ?>">
+                                    <?php echo $this->__('Edit') ?></a>
+                </td>
+                <td>
+                    <a href="<?php echo $this->getUrl('tickets/support/delete', array('ticket_id' => $ticket->getTicketId())) ?>">
+                                    <?php echo $this->__('Delete') ?></a>
                 </td>
             </tr>
             <?php endforeach; ?>

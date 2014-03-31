@@ -5,10 +5,14 @@ class Inchoo_SupportTicket_Block_Adminhtml_Tickets_Edit_Tab_Testform
 {
     protected function _prepareForm()
     {
+
         $form = new Varien_Data_Form(array(
             'id'        => 'edit_form_as',
             'method'    => 'post',
+            //'action' => $this->getUrl('*/*/brb', array('id' => $this->getRequest()->getParam('id')))
             ));
+
+        //$form->setUseContainer(true);
         $fieldset = $form->addFieldset('my_form', array('legend' => 'Add new ticket'));
 
         $fieldset->addField('data', 'text',
