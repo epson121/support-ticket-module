@@ -18,7 +18,10 @@ class Inchoo_SupportTicket_Model_Ticket extends Mage_Core_Model_Abstract
                 $this->setContent($data['ticket_content']);
                 $this->setWebsiteId(Mage::app()->getStore()->getStoreId());
                 $this->setStatus(1);
+
                 $this->setCreatedAt(date("Y-m-d H:i:s"));
+                $this->setUpdatedAt(date("Y-m-d H:i:s"));
+                $this->setSeen(1);
         } catch (Exception $e){
             Mage::logException($e);
         }
@@ -29,6 +32,7 @@ class Inchoo_SupportTicket_Model_Ticket extends Mage_Core_Model_Abstract
         try{
             if(!empty($ticketId)) {
                 $this->setStatus(0);
+                $this->setSeen(1);
             } else {
                 throw new Exception("Error Processing Request: Insufficient Data Provided");
             }

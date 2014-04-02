@@ -88,6 +88,7 @@ class Inchoo_SupportTicket_Adminhtml_Inchoo_SupportticketController extends Mage
     public function newCommentAction() {
          try {
             $data = $this->getRequest()->getParams();
+            $data['is_admin'] = true;
             $ticketCommentModel = Mage::getModel('inchoo_supportticket/ticket_comment');
             $customer = Mage::getSingleton('admin/session')->getUser();
 

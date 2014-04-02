@@ -45,6 +45,11 @@ class Inchoo_SupportTicket_SupportController extends Mage_Core_Controller_Front_
             if ($ticket->load($ticketId)) {
                 Mage::register('loaded_ticket', $ticket);
                 $isArchive ? Mage::register('archive', true) : Mage::register('archive', false);
+                if (!$isArchive) {
+                    $ticket = Mage::getModel('inchoo_supportticket/ticket')->load($ticketId);
+                    $ticket->setSeen(1);
+                    $ticket->save();
+                }
                 $this->loadLayout();
                 $this->renderLayout();
                 return $this;

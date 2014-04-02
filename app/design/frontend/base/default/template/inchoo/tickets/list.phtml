@@ -42,7 +42,7 @@
         <tbody>
             <?php $_odd = ''; ?>
             <?php foreach($_collection as $ticket): ?>
-            <tr>
+            <tr <?php echo $ticket->getSeen() == 0 ? "style='background:#FFCC99;'" : 'ddd' ?> >
                 <td><?php echo $this->escapeHtml($ticket->getTicketId()); ?></td>
                 <td><span class="nobr"><?php echo $this->escapeHtml($ticket->getSubject()); ?></span></td>
                 <td>

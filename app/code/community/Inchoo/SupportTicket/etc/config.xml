@@ -1,7 +1,7 @@
 <config>
     <modules>
         <Inchoo_SupportTicket>
-            <version>0.0.1</version>
+            <version>0.0.3</version>
         </Inchoo_SupportTicket>
     </modules>
     <global>

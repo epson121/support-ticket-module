@@ -3,7 +3,6 @@
 class Inchoo_SupportTicket_Helper_Data extends Mage_Core_Helper_Abstract
 {
 
-    protected $STATUS_OPEN = 0;
     /**
      * get all comments of a ticket
      */
@@ -23,7 +22,8 @@ class Inchoo_SupportTicket_Helper_Data extends Mage_Core_Helper_Abstract
                         ->getCollection()
                         ->addFieldToFilter('customer_id', $customerId)
                         ->addFieldToFilter('website_id', $websiteId)
-                        ->addFieldToFilter('status', $STATUS_OPEN)
+                        ->addFieldToFilter('status', 1)
+                        ->addFieldToFilter('seen', 0)
                         ->getSize();
 
         return $ticketCount;
