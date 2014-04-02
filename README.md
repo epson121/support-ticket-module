@@ -12,3 +12,7 @@ Description:
  * Tickets are per website, per customer.
  * Tickets have status: open/closed
  * When ticket is created, email is sent to administratot (configurable in admin)
+ 
+ Update:
+ * Added 'unseen ticket change' indicator in account navigation tab
+ * Unseen ticket (eg. those with new, unseen comments) are rendered in different color
