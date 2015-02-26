@@ -2,6 +2,7 @@
 
 Description:
 
+
  * Customer can submit support ticket from My Account (needs to be logged in)
  * Customer can view his tickets in My Account (My Tickets)
  * Ticket needs to have Subject and Content
